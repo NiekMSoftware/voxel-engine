@@ -2,5 +2,11 @@
 /bin
 /x64
 
+/Windows/x64
+/Windows/Debug
+/Windows/bin
+
+/RaspberryPi/bin
+
 .vs
 .idea
