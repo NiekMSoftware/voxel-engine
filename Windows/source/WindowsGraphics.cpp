@@ -5,7 +5,12 @@
 
 WindowsGraphics::WindowsGraphics() 
 {
-	glfwInit();
+	if (!glfwInit())
+	{
+		throw std::runtime_error("Failed to initialize GLFW");
+	}
+	bGLFWInitialized = true;
+
 	glfwWindowHint(GL_DEPTH_BUFFER_BIT, 16);
 	glfwWindowHint(GL_DEPTH_BITS, 16);
 
@@ -13,35 +18,50 @@ WindowsGraphics::WindowsGraphics()
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_OPENGL_ES_API);
 
-	pWindow = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "PC Based OpenGL ES", nullptr, nullptr);
-	if (!pWindow) 
+	GLFWwindow *rawWindow = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT,
+		"PC Based OpenGL ES", nullptr, nullptr);
+	if (!rawWindow)
 	{
 		std::cout << "Failed to create GLFW window!\n";
-		glfwTerminate();
-		return;
+		throw std::runtime_error("Failed to create GLFW window");
 	}
 
-	glfwMakeContextCurrent(pWindow);
-	if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress)) 
+	// Transfer ownership to unique_ptr
+	pWindow.reset(rawWindow);
+
+	glfwMakeContextCurrent(pWindow.get());
+	if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress))
 	{
 		std::cout << "Failed to initialize GLAD!\n";
-		glfwDestroyWindow(pWindow);
-		glfwTerminate();
+		throw std::runtime_error("Failed to initialize GLAD");
 	}
 
 	std::cout << "Successfully initialized the Windows Graphics target!\n";
 }
 
+WindowsGraphics::~WindowsGraphics() 
+{
+	if (bGLFWInitialized) 
+	{
+		glfwTerminate();
+	}
+}
+
 void WindowsGraphics::Quit() 
 {
-	glfwDestroyWindow(pWindow);
-	glfwTerminate();
+	pWindow.reset(); // Explicitly destroy window
+
+	if (bGLFWInitialized)
+	{
+		glfwTerminate();
+		bGLFWInitialized = false;
+	}
 }
 
 void WindowsGraphics::SwapBuffer() 
 {
 	glFlush();
-	glfwSwapBuffers(pWindow);
+	glfwSwapBuffers(pWindow.get());
 	glfwPollEvents();
 }
 

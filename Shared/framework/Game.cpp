@@ -13,15 +13,10 @@
 #ifdef WINDOWS_BUILD
 // #include "WindowsInput.h"
 #endif
-Game::Game(const Input* const input, IGraphics* const graphics)
-	: pInput(input), deltaTime(0), pGraphics(graphics)
-{
-	// initialize stuff in here
-}
 
-Game::~Game() {
-	delete pInput;
-	delete pGraphics;
+Game::Game(std::unique_ptr<const Input> input, std::unique_ptr<IGraphics> graphics)
+	: pInput(std::move(input)), pGraphics(std::move(graphics)), deltaTime(0) {
+	// initialize stuff in here
 }
 
 void Game::Start() {

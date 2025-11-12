@@ -1,15 +1,8 @@
 #include "Input.h"
 #include "IInput.h"
 
-Input::Input(const IKeyboard* const keyboard, const IMouse* const mouse)
-	: pMouse(mouse), pKeyboard(keyboard)
-{ }
-
-Input::~Input()
-{
-	delete pMouse;
-	delete pKeyboard;
-}
+Input::Input(std::unique_ptr<const IKeyboard> keyboard, std::unique_ptr<const IMouse> mouse)
+	: pKeyboard(std::move(keyboard)), pMouse(std::move(mouse)) { }
 
 const IKeyboard& Input::GetKeyboard() const
 {

@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include <vector>
 
 #ifdef WINDOWS_BUILD
@@ -20,18 +21,26 @@ constexpr unsigned int ASPECT_RATIO = WINDOW_WIDTH / WINDOW_HEIGHT;
 class Game
 {
 protected:
-	const Input* const pInput;
+	std::unique_ptr<const Input> pInput;
+	std::unique_ptr<IGraphics> pGraphics;
+
 	bool bQuitting{ false };
 	float deltaTime;
-
-	IGraphics* pGraphics;
 
 private:
 	int frameCount{ 0 };
 
 public:
-	Game(const Input* input, IGraphics* graphics);
-	virtual ~Game();
+	Game(std::unique_ptr<const Input> input, std::unique_ptr<IGraphics> graphics);
+	virtual ~Game() = default;
+
+	// Delete copy operations
+	Game(const Game &) = delete;
+	Game &operator=(const Game &) = delete;
+
+	// Allow move operations
+	Game(Game &&) = default;
+	Game &operator=(Game &&) = default;
 
 	void Start();
 	void Quit();
