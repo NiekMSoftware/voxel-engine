@@ -1,0 +1,9 @@
+﻿  Validating sources
+  Copying sources remotely to '172.23.139.62'
+  Validating architecture
+  Validating architecture
+  Starting remote build
+  Compiling sources:
+  XWindow.cpp
+  Linking objects
+  RaspberryPi.vcxproj -> C:\Users\Octo Laptop\Desktop\Desktop\School\BUas\BUas_current\Local\voxel-engine\RaspberryPi\bin\RaspberryPi.out

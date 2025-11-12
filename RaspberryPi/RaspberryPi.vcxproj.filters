@@ -2,6 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\RaspGraphics.cpp" />
+    <ClCompile Include="source\RaspKeyboard.cpp" />
+    <ClCompile Include="source\XWindow.cpp" />
+    <ClCompile Include="source\RaspMouse.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="include">
@@ -13,5 +17,12 @@
     <Filter Include="resources">
       <UniqueIdentifier>{76c0bab7-a4b9-420c-a362-37007ed18f15}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\RaspGraphics.h" />
+    <ClInclude Include="include\RaspMouse.h" />
+    <ClInclude Include="include\XWindow.h" />
+    <ClInclude Include="include\RaspKeyboard.h" />
+    <ClInclude Include="include\EGLState.h" />
   </ItemGroup>
 </Project>

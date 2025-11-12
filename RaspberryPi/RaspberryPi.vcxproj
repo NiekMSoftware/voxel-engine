@@ -51,7 +51,14 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>$(ProjectDir)bin\</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin</RemoteOutRelDir>
-    <IncludePath>/usr/include/aarch64-linux-gnu/c++/12;/usr/include/;/usr/include/bullet;/home/pi/glm;../extern/include;../Raspberry;/home/pi/stb</IncludePath>
+    <IncludePath>/usr/include/aarch64-linux-gnu/c++/12;/usr/include/;/home/octo/glm;../extern/include;../Raspberry;/home/octo/stb</IncludePath>
+    <LibraryPath>/usr/lib/aarch64-linux-gnueabihf</LibraryPath>
+    <RemoteLinkLocalCopyOutput>false</RemoteLinkLocalCopyOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <IncludePath>/usr/include/aarch64-linux-gnu/c++/12;/usr/include;/usr/include/bullet;/home/pi/glm;../Common;../Raspberry;/home/pi/stb;include\;$(IncludePath)</IncludePath>
+    <OutDir>$(ProjectDir)bin\</OutDir>
+    <RemoteOutRelDir>$(RemoteProjectRelDir)/bin</RemoteOutRelDir>
     <LibraryPath>/usr/lib/aarch64-linux-gnueabihf</LibraryPath>
     <RemoteLinkLocalCopyOutput>false</RemoteLinkLocalCopyOutput>
   </PropertyGroup>
@@ -75,14 +82,33 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="source\RaspKeyboard.cpp" />
+    <ClCompile Include="source\RaspGraphics.cpp" />
+    <ClCompile Include="source\RaspMouse.cpp" />
+    <ClCompile Include="source\XWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\EGLState.h" />
+    <ClInclude Include="include\RaspGraphics.h" />
+    <ClInclude Include="include\RaspKeyboard.h" />
+    <ClInclude Include="include\RaspMouse.h" />
+    <ClInclude Include="include\XWindow.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <ClCompile>
       <WarningLevel>TurnOffAllWarnings</WarningLevel>
       <PreprocessorDefinitions>DEBUG;Raspberry_BUILD;GLES3</PreprocessorDefinitions>
     </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ClCompile>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <PreprocessorDefinitions>DEBUG;Raspberry_BUILD;GLES3</PreprocessorDefinitions>
+      <CppLanguageStandard>c++17</CppLanguageStandard>
+    </ClCompile>
+    <Link>
+      <LibraryDependencies>GLESv2;EGL;pthread;X11;Xrandr</LibraryDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

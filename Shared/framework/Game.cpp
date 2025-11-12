@@ -13,6 +13,7 @@
 #ifdef WINDOWS_BUILD
 // #include "WindowsInput.h"
 #endif
+
 Game::Game(const Input* const input, IGraphics* const graphics)
 	: pInput(input), deltaTime(0), pGraphics(graphics)
 {

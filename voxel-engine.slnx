@@ -5,13 +5,13 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="RaspberryPi/RaspberryPi.vcxproj">
+  <Project Path="RaspberryPi/RaspberryPi.vcxproj" Id="d65ba33e-aaec-4759-9420-c0d1c6bed4c4">
     <Platform Solution="*|x64" Project="ARM" />
     <Platform Solution="*|x86" Project="ARM" />
     <Deploy />
   </Project>
-  <Project Path="Shared/Shared.vcxitems" />
-  <Project Path="Windows/Windows.vcxproj">
+  <Project Path="Shared/Shared.vcxitems" Id="05e69cdd-2436-40b0-b68a-ca55d01fcd10" />
+  <Project Path="Windows/Windows.vcxproj" Id="4b23e694-bd6a-41a6-822b-812be654622d">
     <Platform Solution="*|ARM" Project="x64" />
     <Platform Solution="*|ARM64" Project="x64" />
   </Project>
