@@ -1,33 +1,15 @@
 # voxel-engine
 
 A cross‑platform voxel engine. This repo is configured to build on Windows using Visual Studio Insider so it can use Microsoft’s latest C/C++ compiler and toolset (MSVC vNext).
+If you want to build it, make sure to install the latest version of Visual Studio Insider found [here](https://visualstudio.microsoft.com/insiders/).
 
-## Prerequisites (Windows)
-- Visual Studio 2026 (Insider) — latest available build
-- Workload: "Desktop development with C++"
-- Components (checked in the VS Installer):
-  - MSVC toolset (latest vNext/Preview)
-  - Windows 10/11 SDK (latest)
-  - CMake tools for Windows (optional)
+## Usage of Repository
+This project is mainly used for my studies at BUAS, this repository will get updated weekly throughout the end of the second of my study.
 
-## Getting started
-1. Install Visual Studio Insider/Preview via Visual Studio Installer (Preview channel).
-2. Ensure the latest MSVC toolset is installed (VS Installer → Modify → Individual components → "MSVC vNext" / latest MSVC).
-3. Open the solution: `voxel-engine.slnx`.
-4. In "Configuration Manager", select:
-   - Platform: `x64`
-   - Configuration: `Debug` or `Release`
-5. Build: Ctrl+Shift+B
+## Contributions
+Contributions are always welcome if you want to modify the code, just clone it and make a Pull Request and I'll look into it!
 
-## Verify the latest compiler is used
-- Project → Properties → General → Platform Toolset → ensure it points to the newest toolset (e.g., "Visual Studio v150").
-- Help → About Microsoft Visual Studio should show an Insider/Preview build.
+## Credits
+Original code build from [BUas' PiTmpl](https://github.com/BredaUniversityGames/pitmpl24)
 
-## Notes
-- Third‑party headers and libraries live under `extern\include` and `extern\lib` and are referenced by the Windows projects.
-- Windows‑specific sources are under `Windows\source` and headers in `Windows\include`.
-
-## Troubleshooting
-- If the toolset field is missing the vNext/Preview option, reopen the VS Installer and add the latest MSVC components.
-- If linking fails, confirm you selected the `x64` platform to match the provided libraries in `extern\lib\x64`.
-
+Last Modified 11/22/2025
