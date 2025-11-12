@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{efc8689c-d531-4f63-8b85-1ca8d4c8fd0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{af379abc-7e78-473f-b3fc-c82cd51d8e53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{76c0bab7-a4b9-420c-a362-37007ed18f15}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

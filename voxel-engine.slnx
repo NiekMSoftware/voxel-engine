@@ -1,0 +1,18 @@
+<Solution>
+  <Configurations>
+    <Platform Name="ARM" />
+    <Platform Name="ARM64" />
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="RaspberryPi/RaspberryPi.vcxproj">
+    <Platform Solution="*|x64" Project="ARM" />
+    <Platform Solution="*|x86" Project="ARM" />
+    <Deploy />
+  </Project>
+  <Project Path="Shared/Shared.vcxitems" />
+  <Project Path="Windows/Windows.vcxproj">
+    <Platform Solution="*|ARM" Project="x64" />
+    <Platform Solution="*|ARM64" Project="x64" />
+  </Project>
+</Solution>

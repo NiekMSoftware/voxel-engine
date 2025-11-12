@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{73c23b61-9abb-407f-9c2c-f2b076e3fba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{24470084-92eb-452f-ad9c-cfbb5be53cef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets">
+      <UniqueIdentifier>{ea2f6f65-7c4f-4e54-9c0f-880ef4e17ce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\textures">
+      <UniqueIdentifier>{e39d915d-317c-4a13-92f2-a23e1af57aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="assets\shaders">
+      <UniqueIdentifier>{ef81752e-7087-4787-ba89-d362ba9ba36d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\input">
+      <UniqueIdentifier>{b7bea2b3-38cc-4c73-88cf-a863b86833b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\framework">
+      <UniqueIdentifier>{d9e851d1-98b4-448b-9436-78ab55cd6ff9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\framework\input">
+      <UniqueIdentifier>{951984bd-cfdd-4100-b28f-3ecc48347338}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\framework\graphics">
+      <UniqueIdentifier>{0159ae00-b0e6-43e5-b12e-ea704f860e7a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)framework\input\IInput.h">
+      <Filter>include\framework\input</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)framework\input\Input.h">
+      <Filter>include\framework\input</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)framework\IGraphics.h">
+      <Filter>include\framework\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)framework\Game.h">
+      <Filter>include\framework</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)framework\input\Input.cpp">
+      <Filter>source\input</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)framework\Game.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

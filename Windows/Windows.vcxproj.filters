@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{ca374266-03e5-4dc7-8c0e-953bed1abd7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source">
+      <UniqueIdentifier>{f189866a-b9ae-471d-beb7-1015eecf44b8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source\WinMain.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\include\glad\glad.c">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\WindowsGraphics.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+    <ClCompile Include="source\WindowsInput.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\WindowsGraphics.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\WindowsInput.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
