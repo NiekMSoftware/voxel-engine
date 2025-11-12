@@ -9,13 +9,14 @@
 class XWindow
 {
 public:
-	XWindow();
+	XWindow() = default;
 
 	void CreateWindow();
 	const EGLState& GetState() const;
 
-	Display& GetDisplay();
+	Display& GetDisplay() const;
 	Window& GetWindow();
+	void HideMouse() const;
 
 private:
 	Display* display;

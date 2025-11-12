@@ -4,6 +4,11 @@
   Validating architecture
   Starting remote build
   Compiling sources:
+  Game.cpp
+  Input.cpp
+  main.cpp
+  RaspInput.cpp
+  RaspGraphics.cpp
   XWindow.cpp
   Linking objects
   RaspberryPi.vcxproj -> C:\Users\Octo Laptop\Desktop\Desktop\School\BUas\BUas_current\Local\voxel-engine\RaspberryPi\bin\RaspberryPi.out

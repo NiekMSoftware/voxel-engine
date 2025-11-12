@@ -82,16 +82,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="source\RaspKeyboard.cpp" />
+    <ClCompile Include="source\RaspInput.cpp" />
     <ClCompile Include="source\RaspGraphics.cpp" />
-    <ClCompile Include="source\RaspMouse.cpp" />
     <ClCompile Include="source\XWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\EGLState.h" />
     <ClInclude Include="include\RaspGraphics.h" />
-    <ClInclude Include="include\RaspKeyboard.h" />
-    <ClInclude Include="include\RaspMouse.h" />
+    <ClInclude Include="include\RaspInput.h" />
     <ClInclude Include="include\XWindow.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">

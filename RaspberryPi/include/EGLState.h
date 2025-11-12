@@ -8,8 +8,6 @@ struct EGLState
 	EGLSurface surface;
 	EGLContext context;
 	EGLConfig config;
-
 	EGLNativeWindowType  nativeWindow;
-
 };
 #pragma once

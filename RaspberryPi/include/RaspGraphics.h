@@ -8,15 +8,14 @@ class RaspGraphics : public IGraphics
 {
 public:
 	RaspGraphics();
-	~RaspGraphics() {};
 
 	void Quit() override;
-
-	void SwapBuffer() override; // 
+	void SwapBuffer() override; 
 
 	XWindow& Window() const;
 
 private:
 	XWindow* window;
+	void SetupGLDebug() const;
 };
 
