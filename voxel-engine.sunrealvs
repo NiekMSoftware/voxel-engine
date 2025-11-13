@@ -2,6 +2,15 @@
   "Bookmarks": [],
   "Recents": [
     "E:\\voxel-engine\\Shared\\framework\\Game.cpp",
+    "E:\\voxel-engine\\Shared\\voxel_engine\\world\\ChunkManager.h",
+    "E:\\voxel-engine\\Shared\\voxel_engine\\renderer\\VoxelRenderer.cpp",
+    "E:\\voxel-engine\\Shared\\framework\\input\\IInput.h",
+    "E:\\voxel-engine\\Shared\\voxel_engine\\controllable\\Camera.cpp",
+    "E:\\voxel-engine\\Shared\\voxel_engine\\world\\Chunk.h",
+    "E:\\voxel-engine\\Shared\\voxel_engine\\world\\Chunk.cpp",
+    "E:\\voxel-engine\\Shared\\framework\\Game.h",
+    "E:\\voxel-engine\\Shared\\voxel_engine\\renderer\\VoxelRenderer.h",
+    "E:\\voxel-engine\\Shared\\framework\\Game.cpp",
     "E:\\voxel-engine\\Windows\\source\\WindowsGraphics.cpp",
     "E:\\voxel-engine\\Windows\\source\\WinMain.cpp",
     "E:\\voxel-engine\\Shared\\voxel_engine\\world\\Chunk.cpp",
@@ -21,6 +30,8 @@
     "E:\\voxel-engine\\Windows\\source\\WinMain.cpp",
     "E:\\voxel-engine\\Shared\\voxel_engine\\world\\Chunk.cpp",
     "E:\\voxel-engine\\Shared\\framework\\Game.h",
-    "E:\\voxel-engine\\Shared\\voxel_engine\\world\\Chunk.h"
+    "E:\\voxel-engine\\Shared\\voxel_engine\\world\\Chunk.h",
+    "E:\\voxel-engine\\Windows\\source\\WindowsGraphics.cpp",
+    "E:\\voxel-engine\\Windows\\source\\WinMain.cpp"
   ]
 }

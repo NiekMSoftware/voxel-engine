@@ -29,6 +29,11 @@ namespace voxel_engine::rendering
 
 	void VoxelRenderer::CreateCubeMesh()
 	{
+        // Base cube mesh shared across all voxel instances
+        // This follows the instancing approach from LearnOpenGL tutorial:
+        // https://learnopengl.com/Advanced-OpenGL/Instancing
+        // We define the mesh once and reuse it for all voxels via instancing
+        // Format: position (3) + UV (2) + normal (3) = 8 floats per vertex
         const float vertices[] = {
             // position(3)        UV (2)       normal (3) = 8 floats per vertex
             // Front face (+Z)
@@ -80,6 +85,7 @@ namespace voxel_engine::rendering
               -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  0.0f,  0.0f,
         };
 
+        // Create VAO and VBO for the base cube mesh
         glGenVertexArrays(1, &mCubeVAO);
         glGenBuffers(1, &mCubeVBO);
 
@@ -87,6 +93,8 @@ namespace voxel_engine::rendering
         glBindBuffer(GL_ARRAY_BUFFER, mCubeVBO);
         glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
+        // Set up vertex attributes for the base mesh
+        // These will be shared (divisor=0) across all instances
         // Position (location 0)
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void*)nullptr);
         glEnableVertexAttribArray(0);
@@ -104,6 +112,11 @@ namespace voxel_engine::rendering
 
 	void VoxelRenderer::LoadShaders()
 	{
+        // Vertex shader using instanced rendering
+        // References:
+        // - LearnOpenGL instancing: https://learnopengl.com/Advanced-OpenGL/Instancing
+        // - OpenGL instancing tutorial: https://ogldev.org/www/tutorial33/tutorial33.html
+        // Uses gl_InstanceID implicitly through vertex attribute divisors
         const char *vertexShaderSource = R"(
         #version 310 es
         layout(location = 0) in vec3 aPosition;
@@ -117,9 +130,10 @@ namespace voxel_engine::rendering
         
         out vec2 vUV;
         out vec3 vNormal;
-        flat out uint vTextureID;
+        flat out uint vTextureID;   // 'flat' prevents interpolation for integer
         
         void main() {
+			// Transform base cube position by instance offset
             vec3 worldPos = aPosition + aInstancePos;
             gl_Position = projection * view * vec4(worldPos, 1.0);
             vUV = aUV;
@@ -128,7 +142,9 @@ namespace voxel_engine::rendering
         }
 		)";
 
-        // Simple fragment shader
+        // Fragment shader with texture array sampling
+        // Uses sampler2DArray for efficient texture atlas
+        // Reference: https://www.khronos.org/opengl/wiki/Array_Texture
         const char *fragmentShaderSource = R"(
         #version 310 es
 		precision highp float;
@@ -174,12 +190,15 @@ namespace voxel_engine::rendering
 
 	void VoxelRenderer::LoadTextures()
 	{
-        // TODO: Load a texture atlas and initialize properties
-
+        // Create a 2D texture array for voxel types
+        // This is more efficient than switching textures per voxel (texture atlas approach)
+        // Reference: https://www.khronos.org/opengl/wiki/Array_Texture
+        // Common in voxel engines to avoid texture binding overhead
         glGenTextures(1, &mTextureArray);
         glBindTexture(GL_TEXTURE_2D_ARRAY, mTextureArray);
 
-        // TODO: Create texture atlas
+        // Allocate storage for 3 texture layers (grass, dirt, stone)
+        // Each layer is 16x16 pixels
         glTexImage3D(GL_TEXTURE_2D_ARRAY, 0, GL_RGB8, 16, 16, 3, 0, GL_RGB, GL_UNSIGNED_BYTE, nullptr);
 
         // Fill with placeholder colors
@@ -207,13 +226,18 @@ namespace voxel_engine::rendering
         glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	}
 
+    // Simple frustum culling implementation
+    // Based on "Let's Make a Voxel Engine" frustum culling tutorial:
+    // https://sites.google.com/site/letsmakeavoxelengine/home/frustum-culling
+    // Tests if a chunk should be rendered based on distance and camera direction
     bool VoxelRenderer::IsChunkVisible(const glm::vec3& chunkWorldPos, const glm::vec3& cameraPos,
         const glm::vec3& cameraFront, const float renderDistance) const
 	{
+        // Calculate chunk center
         const glm::vec3 chunkCenter = chunkWorldPos + glm::vec3(8.0f);
         const float distance = glm::length(chunkCenter - cameraPos);
 
-        // Always render chunks within distance
+        // Always render chunks within distance (within ~1.5 chunk distances)
         if (distance < 24.0f) {
             return true;
         }
@@ -223,10 +247,10 @@ namespace voxel_engine::rendering
             return false;  // too far
         }
 
-        // Simply frustum check
+        // Simple frustum check
         const glm::vec3 toChunk = glm::normalize(chunkCenter - cameraPos);
         const float dotProduct = glm::dot(toChunk, cameraFront);
-        if (dotProduct < -0.2f) {  // slightly behind
+        if (dotProduct < -0.2f) {  // Allow slight tolerance for chunks behind camera
             return false;
         }
 

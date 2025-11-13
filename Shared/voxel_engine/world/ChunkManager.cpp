@@ -7,6 +7,9 @@ namespace voxel_engine::world
 		: mCubeVBO(cubeVBO)
 	{ }
 
+	// Get all chunks for rendering
+	// Following the chunk management pattern from "Let's Make a Voxel Engine":
+	// https://sites.google.com/site/letsmakeavoxelengine/home/chunk-management
 	std::vector<Chunk*> ChunkManager::GetAllChunks()
 	{
 		std::vector<Chunk*> chunks;
@@ -56,8 +59,10 @@ namespace voxel_engine::world
 		}
 	}
 
+	// Convert world coordinates to chunk coordinates
+	// Uses bit shifting for fast division by 16 (CHUNK_SIZE)
+	// >> 4 is equivalent to / 16
 	glm::ivec3 ChunkManager::WorldToChunkPos(const int worldX, const int worldY, const int worldZ) {
-		// Divide by 16 (CHUNK_SIZE)
 		return glm::ivec3(
 			worldX >> 4,  
 			0,            
@@ -65,6 +70,9 @@ namespace voxel_engine::world
 		);
 	}
 
+	// Convert world coordinates to chunk-local coordinates
+	// Uses bitwise AND with 15 for fast modulo 16
+	// & 15 is equivalent to % 16
 	glm::ivec3 ChunkManager::WorldToLocalPos(const int worldX, const int worldY, const int worldZ) {
 		// Modulo 16
 		return glm::ivec3(

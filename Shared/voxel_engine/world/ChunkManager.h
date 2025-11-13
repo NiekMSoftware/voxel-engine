@@ -17,9 +17,9 @@
 
 namespace voxel_engine::world
 {
-	struct Voxel;
-	class Chunk;
-
+	/**
+	 * @brief Custom hash function for using glm::ivec3 as a map key
+	 */
 	struct IVec3Hash
 	{
 		std::size_t operator()(const glm::ivec3& v) const
@@ -30,10 +30,21 @@ namespace voxel_engine::world
 		}
 	};
 
+	/**
+	 * @brief Manages all chunks in the world
+	 *
+	 * Follows the chunk management pattern from "Let's Make a Voxel Engine":
+	 * https://sites.google.com/site/letsmakeavoxelengine/home/chunk-management
+	 *
+	 * - Stores chunks in a hash map for fast lookup
+	 * - Provides world-to-chunk coordinate conversion
+	 * - Manages chunk creation and retrieval
+	 * - Converts between world and chunk-local coordinates
+	 */
 	class ChunkManager
 	{
-		std::unordered_map<glm::ivec3, std::unique_ptr<Chunk>, IVec3Hash> mChunks;
 		GLuint mCubeVBO;
+		std::unordered_map<glm::ivec3, std::unique_ptr<Chunk>, IVec3Hash> mChunks;
 
 	public:
 		ChunkManager(GLuint cubeVBO);
@@ -50,7 +61,16 @@ namespace voxel_engine::world
 		void SetVoxel(int worldX, int worldY, int worldZ, const Voxel &voxel);
 
 	private:
+		/**
+		 * @brief Convert world coordinates to chunk coordinates
+		 * Uses bit shift for efficient division by 16
+		 */
 		glm::ivec3 WorldToChunkPos(int worldX, int worldY, int worldZ);
+
+		/**
+		 * @brief Convert world coordinates to chunk-local coordinates
+		 * Uses bitwise AND for efficient modulo 16
+		 */
 		glm::ivec3 WorldToLocalPos(int worldX, int worldY, int worldZ);
 	};
 }

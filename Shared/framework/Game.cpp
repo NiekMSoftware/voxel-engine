@@ -32,7 +32,7 @@ Game::Game(std::unique_ptr<const Input> input, std::unique_ptr<IGraphics> graphi
 #endif
 
 #if Raspberry_BUILD
-	pRenderer->SetRenderDistance(2);
+	pRenderer->SetRenderDistance(4);
 #endif
 
 	pChunkMgr = std::make_unique<ChunkManager>(pRenderer->GetCubeVBO());
