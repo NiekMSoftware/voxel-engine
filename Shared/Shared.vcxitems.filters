@@ -16,9 +16,6 @@
     <Filter Include="assets\shaders">
       <UniqueIdentifier>{ef81752e-7087-4787-ba89-d362ba9ba36d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\input">
-      <UniqueIdentifier>{b7bea2b3-38cc-4c73-88cf-a863b86833b7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="include\framework">
       <UniqueIdentifier>{d9e851d1-98b4-448b-9436-78ab55cd6ff9}</UniqueIdentifier>
     </Filter>
@@ -27,6 +24,30 @@
     </Filter>
     <Filter Include="include\framework\graphics">
       <UniqueIdentifier>{0159ae00-b0e6-43e5-b12e-ea704f860e7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\framework">
+      <UniqueIdentifier>{07cb0777-1719-47f2-91d5-0e09347f3e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\framework\input">
+      <UniqueIdentifier>{b7bea2b3-38cc-4c73-88cf-a863b86833b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\voxel_engine">
+      <UniqueIdentifier>{358de161-de23-40bc-ba35-f1db9a5900cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\voxel_engine">
+      <UniqueIdentifier>{f0604d03-41e9-4f4d-83e5-75677c8b3ba6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\voxel_engine\renderer">
+      <UniqueIdentifier>{f9bbfa55-0a3a-4e49-8ea5-a4cb0761864c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\voxel_engine\renderer">
+      <UniqueIdentifier>{11121fa4-3f9d-4dbb-80bb-2b12c62b4beb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\voxel_engine\world">
+      <UniqueIdentifier>{941191fa-cfbb-415f-9de1-2d6b44afa9f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\voxel_engine\world">
+      <UniqueIdentifier>{245335c9-b5df-4f10-a185-5129a3c1d76f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -42,13 +63,29 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\Game.h">
       <Filter>include\framework</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\world\Chunk.h">
+      <Filter>include\voxel_engine\world</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\renderer\VoxelRenderer.h">
+      <Filter>include\voxel_engine\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\input\Input.cpp">
-      <Filter>source\input</Filter>
+      <Filter>source\framework\input</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\Game.cpp">
-      <Filter>source</Filter>
+      <Filter>source\framework</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\world\Chunk.cpp">
+      <Filter>source\voxel_engine\world</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\renderer\VoxelRenderer.cpp">
+      <Filter>source\voxel_engine\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.cpp" />
   </ItemGroup>
 </Project>

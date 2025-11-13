@@ -7,8 +7,20 @@
 #include <sstream>
 #include <iostream>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "IGraphics.h"
 #include "input/IInput.h"
+
+#include "voxel_engine/controllable/Camera.h"
+#include "voxel_engine/world/ChunkManager.h"
+#include "voxel_engine/world/Chunk.h"
+#include "voxel_engine/renderer/VoxelRenderer.h"
+
+using namespace voxel_engine;
+using namespace voxel_engine::world;
+using namespace voxel_engine::rendering;
 
 #ifdef WINDOWS_BUILD
 // #include "WindowsInput.h"
@@ -16,7 +28,47 @@
 
 Game::Game(std::unique_ptr<const Input> input, std::unique_ptr<IGraphics> graphics)
 	: pInput(std::move(input)), pGraphics(std::move(graphics)), deltaTime(0) {
-	// initialize stuff in here
+
+	pRenderer = std::make_unique<VoxelRenderer>();
+	pRenderer->Initialize();
+	pRenderer->SetRenderDistance(4);
+
+	pChunkMgr = std::make_unique<ChunkManager>(pRenderer->GetCubeVBO());
+
+	// Initialize camera
+	pCamera = std::make_unique<Camera>(glm::vec3(8.0f, 35.f, 8.0f));
+	pCamera->SetMovementSpeed(15.0f);
+
+	// Generate 128×128×32 world (8×8×2 chunks)
+	for (int x = 0; x < 8; x++) {
+		for (int z = 0; z < 8; z++) {
+			for (int y = 0; y < 2; y++) {  // 2 vertical chunk layers
+				Chunk *chunk = pChunkMgr->CreateChunk(glm::ivec3(x, y, z));
+
+				// Fill chunks based on height
+				for (int i = 0; i < CHUNK_SIZE; i++) {
+					for (int j = 0; j < CHUNK_SIZE; j++) {
+						for (int k = 0; k < CHUNK_SIZE; k++) {
+							// Calculate world height
+							int worldY = y * CHUNK_SIZE + j;
+
+							if (worldY >= 32) continue;  // Above terrain
+
+							Voxel voxel;
+							if (worldY == 31) {
+								voxel.type = 1; voxel.textureID = 0;  // Grass top
+							} else if (worldY >= 28) {
+								voxel.type = 2; voxel.textureID = 1;  // Dirt
+							} else {
+								voxel.type = 3; voxel.textureID = 2;  // Stone
+							}
+							chunk->SetVoxel(i, j, k, voxel);
+						}
+					}
+				}
+			}
+		}
+	}
 }
 
 void Game::Start() {
@@ -43,13 +95,17 @@ void Game::Start() {
 			frameCount = 0;
 		}
 
+		UpdateCamera();
+
 		// Set up the viewport
 		ClearScreen();
 		glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 
-		Update(deltaTime);
+		glm::mat4 view = pCamera->GetViewMatrix();
+		glm::mat4 proj = pCamera->GetProjectionMatrix(ASPECT_RATIO);
 
-		// Render your game here
+		pRenderer->Render(pChunkMgr->GetAllChunks(), view, proj);
+
 		glFlush();
 		pGraphics->SwapBuffer();
 		lastTime = time;
@@ -70,27 +126,36 @@ const Input& Game::GetInput() const {
 void Game::ProcessInput() {
 	const Input& input = GetInput();
 	const IKeyboard& keyboard = input.GetKeyboard();
-	const IMouse& mouse = input.GetMouse();
 
 	// Leaving window
 	if (keyboard.GetKey(Key::ESCAPE)) {
 		printf("\nQuitting Game..");
 		Quit();
-		return;
+	}
+}
+
+void Game::UpdateCamera() {
+	const Input &input = GetInput();
+	const IKeyboard &keyboard = input.GetKeyboard();
+	const IMouse &mouse = input.GetMouse();
+
+	// Movement
+	if (keyboard.GetKey(Key::W)) pCamera->MoveForward(deltaTime);
+	if (keyboard.GetKey(Key::S)) pCamera->MoveBackward(deltaTime);
+	if (keyboard.GetKey(Key::A)) pCamera->MoveLeft(deltaTime);
+	if (keyboard.GetKey(Key::D)) pCamera->MoveRight(deltaTime);
+	if (keyboard.GetKey(Key::SPACE)) pCamera->MoveUp(deltaTime);
+	if (keyboard.GetKey(Key::CTRL_LEFT)) pCamera->MoveDown(deltaTime);
+
+	// Speed control
+	if (keyboard.GetKey(Key::SHIFT_LEFT)) {
+		pCamera->SetMovementSpeed(5.6f);  // Sprint
+	} else {
+		pCamera->SetMovementSpeed(4.3f);  // Normal
 	}
 
-	// Testing key outputs
-	for (int i = (int)Key::A; i <= (int)Key::Z; ++i) {
-		if (keyboard.GetKey((Key)i)) {
-			printf("%c\n", 'A' + i);
-			break; 
-		}
-	}
-
-	// Testing mouse outputs
-	if (mouse.GetButtonDown(MouseButton::LEFT))		printf("Mouse-Left\n");
-	if (mouse.GetButtonDown(MouseButton::MIDDLE))	printf("Mouse-Mid\n");
-	if (mouse.GetButtonDown(MouseButton::RIGHT))	printf("Mouse-Right\n");
+	auto mousePos = mouse.GetPosition();
+	pCamera->ProcessMousePosition(mousePos.x, mousePos.y);
 }
 
 void Game::Update(float /*deltaTime*/) {

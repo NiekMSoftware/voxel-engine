@@ -16,13 +16,29 @@ class Input;
 
 constexpr unsigned int WINDOW_WIDTH = 1024;
 constexpr unsigned int WINDOW_HEIGHT = 768;
-constexpr unsigned int ASPECT_RATIO = WINDOW_WIDTH / WINDOW_HEIGHT;
+constexpr float ASPECT_RATIO = static_cast<float>(WINDOW_WIDTH) / static_cast<float>(WINDOW_HEIGHT);
+
+namespace voxel_engine::rendering
+{
+	class VoxelRenderer;
+}
+
+namespace voxel_engine::world
+{
+	class ChunkManager;
+}
+
+class Camera;
 
 class Game
 {
 protected:
 	std::unique_ptr<const Input> pInput;
 	std::unique_ptr<IGraphics> pGraphics;
+
+	std::unique_ptr<voxel_engine::rendering::VoxelRenderer> pRenderer;
+	std::unique_ptr<voxel_engine::world::ChunkManager> pChunkMgr;
+	std::unique_ptr<Camera> pCamera;
 
 	bool bQuitting{ false };
 	float deltaTime;
@@ -49,6 +65,7 @@ public:
 
 protected:
 	void ProcessInput();
+	void UpdateCamera();
 
 	virtual void Update(float deltaTime);
 	virtual void Render() {  }

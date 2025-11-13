@@ -1,5 +1,7 @@
 // WinMain.cpp - Main executable function and entry-point for the Window Application.
 
+#undef RASPBERRY_PI
+
 // Global includes
 #include <iostream>
 #include <memory>

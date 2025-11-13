@@ -73,7 +73,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(ProjectDir)bin\</OutDir>
-    <IncludePath>$(SolutionDir)extern\include;include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)extern\include;include\;$(IncludePath);</IncludePath>
     <LibraryPath>$(SolutionDir)extern\lib;$(SolutionDir)extern\lib\x64\Debug;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

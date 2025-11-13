@@ -30,6 +30,8 @@ WindowsGraphics::WindowsGraphics()
 	pWindow.reset(rawWindow);
 
 	glfwMakeContextCurrent(pWindow.get());
+	glfwSetInputMode(pWindow.get(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 	if (!gladLoadGLES2Loader((GLADloadproc)glfwGetProcAddress))
 	{
 		std::cout << "Failed to initialize GLAD!\n";
