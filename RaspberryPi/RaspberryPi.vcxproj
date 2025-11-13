@@ -51,7 +51,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <OutDir>$(ProjectDir)bin\</OutDir>
     <RemoteOutRelDir>$(RemoteProjectRelDir)/bin</RemoteOutRelDir>
-    <IncludePath>/usr/include/aarch64-linux-gnu/c++/12;/usr/include/;/home/octo/glm;../extern/include;../Raspberry;/home/octo/stb</IncludePath>
+    <IncludePath>/usr/include/aarch64-linux-gnu/c++/12;/usr/include/;/home/octo/glm;../extern/include;../Raspberry;/home/pi/stb;$(IncludePath)</IncludePath>
     <LibraryPath>/usr/lib/aarch64-linux-gnueabihf</LibraryPath>
     <RemoteLinkLocalCopyOutput>false</RemoteLinkLocalCopyOutput>
   </PropertyGroup>
@@ -64,11 +64,13 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <Link>
-      <LibraryDependencies>GLESv2;EGL;pthread;X11;Xrandr;assimp;BulletCollision;BulletSoftBody;BulletDynamics;LinearMath;</LibraryDependencies>
+      <LibraryDependencies>GLESv2;EGL;pthread;X11;Xrandr;assimp;LinearMath;</LibraryDependencies>
     </Link>
     <RemotePostBuildEvent>
-      <Command>gpio export 17 out</Command>
-      <Message>export pin 17 using the gpio utility so that we can execute the blink program without sudo</Message>
+      <Command>
+      </Command>
+      <Message>
+      </Message>
     </RemotePostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
