@@ -35,8 +35,6 @@ WindowsGraphics::WindowsGraphics()
 		std::cout << "Failed to initialize GLAD!\n";
 		throw std::runtime_error("Failed to initialize GLAD");
 	}
-
-	std::cout << "Successfully initialized the Windows Graphics target!\n";
 }
 
 WindowsGraphics::~WindowsGraphics() 
