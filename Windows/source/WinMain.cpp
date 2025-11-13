@@ -38,10 +38,6 @@ int main()
 	pGame = new Game(pInput, pGraphics);
 
 	pGame->Start();
-
-	delete pGraphics;
-	delete pInput;
 	delete pGame;
-
 	return 0;
 }
