@@ -7,6 +7,10 @@
 /Windows/bin
 
 /RaspberryPi/bin
+/RaspberryPi/obj
 
 .vs
 .idea
+*.tlog
+*.lastbuildstate
+*.log

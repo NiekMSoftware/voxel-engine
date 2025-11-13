@@ -29,8 +29,7 @@ void Game::Start() {
 	// uncomment to track average FPS:
 	// float averageFPS{ 0 };
 
-	while (!bQuitting) 
-	{
+	while (!bQuitting) {
 		ProcessInput();
 		auto time = std::chrono::system_clock::now();
 		std::chrono::duration<float> delta = time - lastTime;
@@ -38,9 +37,8 @@ void Game::Start() {
 		deltaTime = delta.count();
 
 		std::chrono::duration<float> elapsed = time - startTime;
-		if (elapsed.count() > 0.25f && frameCount > 10) 
-		{
-			// averageFPS = static_cast<float>(frameCount) / elapsed.count();
+		if (elapsed.count() > 0.25f && frameCount > 10) {
+			// averageFPS = (float)frameCount / elapsed.count();
 			startTime = time;
 			frameCount = 0;
 		}
@@ -52,7 +50,6 @@ void Game::Start() {
 		Update(deltaTime);
 
 		// Render your game here
-
 		glFlush();
 		pGraphics->SwapBuffer();
 		lastTime = time;
@@ -62,8 +59,7 @@ void Game::Start() {
 	pGraphics->Quit();
 }
 
-void Game::Quit()
-{
+void Game::Quit() {
 	bQuitting = true;
 }
 
@@ -71,13 +67,33 @@ const Input& Game::GetInput() const {
 	return *pInput;
 }
 
-void Game::ProcessInput()
-{
-	
+void Game::ProcessInput() {
+	const Input& input = GetInput();
+	const IKeyboard& keyboard = input.GetKeyboard();
+	const IMouse& mouse = input.GetMouse();
+
+	// Leaving window
+	if (keyboard.GetKey(Key::ESCAPE)) {
+		printf("\nQuitting Game..");
+		Quit();
+		return;
+	}
+
+	// Testing key outputs
+	for (int i = (int)Key::A; i <= (int)Key::Z; ++i) {
+		if (keyboard.GetKey((Key)i)) {
+			printf("%c\n", 'A' + i);
+			break; 
+		}
+	}
+
+	// Testing mouse outputs
+	if (mouse.GetButtonDown(MouseButton::LEFT))		printf("Mouse-Left\n");
+	if (mouse.GetButtonDown(MouseButton::MIDDLE))	printf("Mouse-Mid\n");
+	if (mouse.GetButtonDown(MouseButton::RIGHT))	printf("Mouse-Right\n");
 }
 
-void Game::Update(float /*deltaTime*/)
-{
+void Game::Update(float /*deltaTime*/) {
 	// Update your game logic here
 }
 
