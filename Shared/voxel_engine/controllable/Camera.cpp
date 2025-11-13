@@ -7,7 +7,7 @@ Camera::Camera(const glm::vec3 &position, const glm::vec3 &up, float yaw, float 
 	, mPitch(pitch)
 	, mMovementSpeed(10.0f)
 	, mMouseSensitivity(0.1f)
-	, mFOV(90.0f)
+	, mFOV(60.0f)
 	, mLastMouseX(0.0f)
 	, mLastMouseY(0.0f)
 	, bFirstMouse(true) {

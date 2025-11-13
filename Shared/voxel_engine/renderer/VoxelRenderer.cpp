@@ -1,6 +1,7 @@
 #include "VoxelRenderer.h"
 #include "voxel_engine/world/Chunk.h"
 #include <glm/gtc/matrix_transform.hpp>
+#include <cstdio>
 
 namespace voxel_engine::rendering
 {
@@ -104,7 +105,7 @@ namespace voxel_engine::rendering
 	void VoxelRenderer::LoadShaders()
 	{
         const char *vertexShaderSource = R"(
-        #version 330 core
+        #version 310 es
         layout(location = 0) in vec3 aPosition;
         layout(location = 1) in vec3 aInstancePos;
         layout(location = 2) in uint aTextureID;
@@ -129,7 +130,11 @@ namespace voxel_engine::rendering
 
         // Simple fragment shader
         const char *fragmentShaderSource = R"(
-        #version 330 core
+        #version 310 es
+		precision highp float;
+		precision highp int;
+		precision highp sampler2DArray;
+
         in vec2 vUV;
         in vec3 vNormal;
         flat in uint vTextureID;

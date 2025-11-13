@@ -19,5 +19,6 @@
   <Project Path="Windows/Windows.vcxproj" Id="4b23e694-bd6a-41a6-822b-812be654622d">
     <Platform Solution="*|ARM" Project="x64" />
     <Platform Solution="*|ARM64" Project="x64" />
+    <Build Solution="Debug|ARM64" Project="false" />
   </Project>
 </Solution>

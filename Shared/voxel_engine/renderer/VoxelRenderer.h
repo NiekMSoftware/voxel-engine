@@ -8,7 +8,7 @@
 #endif
 
 #ifdef Raspberry_BUILD
-#include <GLES/gl3.h>
+#include <GLES3/gl3.h>
 #endif
 
 namespace voxel_engine::world

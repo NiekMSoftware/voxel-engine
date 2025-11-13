@@ -10,17 +10,12 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+// Interfaces
 #include "IGraphics.h"
 #include "input/IInput.h"
 
-#include "voxel_engine/controllable/Camera.h"
-#include "voxel_engine/world/ChunkManager.h"
+// Voxel Engine
 #include "voxel_engine/world/Chunk.h"
-#include "voxel_engine/renderer/VoxelRenderer.h"
-
-using namespace voxel_engine;
-using namespace voxel_engine::world;
-using namespace voxel_engine::rendering;
 
 #ifdef WINDOWS_BUILD
 // #include "WindowsInput.h"
@@ -31,7 +26,14 @@ Game::Game(std::unique_ptr<const Input> input, std::unique_ptr<IGraphics> graphi
 
 	pRenderer = std::make_unique<VoxelRenderer>();
 	pRenderer->Initialize();
-	pRenderer->SetRenderDistance(4);
+
+#if WINDOWS_BUILD
+	pRenderer->SetRenderDistance(6);
+#endif
+
+#if Raspberry_BUILD
+	pRenderer->SetRenderDistance(2);
+#endif
 
 	pChunkMgr = std::make_unique<ChunkManager>(pRenderer->GetCubeVBO());
 
@@ -79,7 +81,7 @@ void Game::Start() {
 	auto lastTime = startTime;
 
 	// uncomment to track average FPS:
-	// float averageFPS{ 0 };
+	float averageFPS{ 0 };
 
 	while (!bQuitting) {
 		ProcessInput();
@@ -90,7 +92,7 @@ void Game::Start() {
 
 		std::chrono::duration<float> elapsed = time - startTime;
 		if (elapsed.count() > 0.25f && frameCount > 10) {
-			// averageFPS = (float)frameCount / elapsed.count();
+			averageFPS = (float)frameCount / elapsed.count();
 			startTime = time;
 			frameCount = 0;
 		}
@@ -105,6 +107,8 @@ void Game::Start() {
 		glm::mat4 proj = pCamera->GetProjectionMatrix(ASPECT_RATIO);
 
 		pRenderer->Render(pChunkMgr->GetAllChunks(), view, proj);
+
+		printf("average frames: %f\n", averageFPS);
 
 		glFlush();
 		pGraphics->SwapBuffer();
@@ -154,7 +158,22 @@ void Game::UpdateCamera() {
 		pCamera->SetMovementSpeed(4.3f);  // Normal
 	}
 
-	auto mousePos = mouse.GetPosition();
+	// Camera rotation - Arrow Keys
+	const float rotationSpeed = 500.0f;
+	if (keyboard.GetKey(Key::ARROW_LEFT)) {
+		pCamera->ProcessMouseMovement(-rotationSpeed * deltaTime, 0.0f);
+	}
+	if (keyboard.GetKey(Key::ARROW_RIGHT)) {
+		pCamera->ProcessMouseMovement(rotationSpeed * deltaTime, 0.0f);
+	}
+	if (keyboard.GetKey(Key::ARROW_UP)) {
+		pCamera->ProcessMouseMovement(0.0f, rotationSpeed * deltaTime);
+	}
+	if (keyboard.GetKey(Key::ARROW_DOWN)) {
+		pCamera->ProcessMouseMovement(0.0f, -rotationSpeed * deltaTime);
+	}
+
+	const glm::vec2 mousePos = mouse.GetPosition();
 	pCamera->ProcessMousePosition(mousePos.x, mousePos.y);
 }
 

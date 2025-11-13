@@ -2,6 +2,13 @@
 #include <memory>
 #include <vector>
 
+#include "voxel_engine/controllable/Camera.h"
+#include "voxel_engine/renderer/VoxelRenderer.h"
+#include "voxel_engine/world/ChunkManager.h"
+using namespace voxel_engine;
+using namespace voxel_engine::rendering;
+using namespace voxel_engine::world;
+
 #ifdef WINDOWS_BUILD
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -18,26 +25,14 @@ constexpr unsigned int WINDOW_WIDTH = 1024;
 constexpr unsigned int WINDOW_HEIGHT = 768;
 constexpr float ASPECT_RATIO = static_cast<float>(WINDOW_WIDTH) / static_cast<float>(WINDOW_HEIGHT);
 
-namespace voxel_engine::rendering
-{
-	class VoxelRenderer;
-}
-
-namespace voxel_engine::world
-{
-	class ChunkManager;
-}
-
-class Camera;
-
 class Game
 {
 protected:
 	std::unique_ptr<const Input> pInput;
 	std::unique_ptr<IGraphics> pGraphics;
 
-	std::unique_ptr<voxel_engine::rendering::VoxelRenderer> pRenderer;
-	std::unique_ptr<voxel_engine::world::ChunkManager> pChunkMgr;
+	std::unique_ptr<VoxelRenderer> pRenderer;
+	std::unique_ptr<ChunkManager> pChunkMgr;
 	std::unique_ptr<Camera> pCamera;
 
 	bool bQuitting{ false };

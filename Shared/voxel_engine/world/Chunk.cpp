@@ -1,4 +1,5 @@
 #include "Chunk.h"
+#include <cstring>
 
 namespace voxel_engine::world
 {
