@@ -1,19 +1,27 @@
 #pragma once
 
+#include <memory>
+
 class IMouse;
 class IKeyboard;
 
-
-class Input
-{
+class Input {
 public:
-	Input(const IKeyboard* keyboard, const IMouse* mouse);
-	~Input();
+    Input(std::unique_ptr<const IKeyboard> keyboard, std::unique_ptr<const IMouse> mouse);
+    ~Input() = default;
 
-	const IKeyboard& GetKeyboard() const;
-	const IMouse& GetMouse() const;
+    // Delete copy operations
+    Input(const Input &) = delete;
+    Input &operator=(const Input &) = delete;
+
+    // Allow move operations
+    Input(Input &&) = default;
+    Input &operator=(Input &&) = default;
+
+    const IKeyboard &GetKeyboard() const;
+    const IMouse &GetMouse() const;
 
 private:
-	const IMouse *const pMouse;
-	const IKeyboard *const pKeyboard;
+    std::unique_ptr<const IKeyboard> pKeyboard;
+    std::unique_ptr<const IMouse> pMouse;
 };

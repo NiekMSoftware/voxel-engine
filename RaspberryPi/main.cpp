@@ -1,14 +1,12 @@
-//Set up the Raspberry/Linux systems
-
 // Global includes
 #include "XWindow.h"
 #include "RaspGraphics.h"
 #include "RaspInput.h"
+#include <iostream>
 
 // framework includes
 #include "framework/Game.h"
 #include "framework/input/Input.h"
-#include "framework/input/IInput.h"
 
 RaspGraphics* graphics;
 Input* input;
@@ -16,13 +14,31 @@ Game* game;
 
 int main()
 {
-    // Create graphics and input
-    graphics = new RaspGraphics();
-    input = new Input(new RaspKeyboard(), new RaspMouse(graphics->Window().GetDisplay(), graphics->Window().GetWindow()));
+    try
+    {
+        // Create graphics first (owns the window)
+        auto graphics = std::make_unique<RaspGraphics>();
 
-    // Start game with (input, graphics) abstracted from [Pi4 / Windows] platforms
-    game = new Game(input, graphics);
-    game->Start();
-    delete game;
-    return 0;
+        // Get reference to window for input creation
+        XWindow& window = graphics->Window();
+
+        // Create input system (references the window, doesn't own it)
+        auto input = std::make_unique<Input>(
+            std::make_unique<RaspKeyboard>(), 
+            std::make_unique<RaspMouse>(window.GetDisplay(),window.GetWindow())
+        );
+
+        // Start game with (input, graphics) abstracted from [Pi4 / Windows] platforms
+        auto game = std::make_unique<Game>(std::move(input), std::move(graphics));
+
+        // Run the game
+        game->Start();
+        return 0;
+    }
+    catch (const std::exception& e)
+	{
+        std::cerr << "Fatal error: " << e.what() << std::endl;
+        return 1;
+	}
+
 }

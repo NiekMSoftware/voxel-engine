@@ -14,15 +14,9 @@
 // #include "WindowsInput.h"
 #endif
 
-Game::Game(const Input* const input, IGraphics* const graphics)
-	: pInput(input), deltaTime(0), pGraphics(graphics)
-{
+Game::Game(std::unique_ptr<const Input> input, std::unique_ptr<IGraphics> graphics)
+	: pInput(std::move(input)), pGraphics(std::move(graphics)), deltaTime(0) {
 	// initialize stuff in here
-}
-
-Game::~Game() {
-	delete pInput;
-	delete pGraphics;
 }
 
 void Game::Start() {
@@ -35,8 +29,7 @@ void Game::Start() {
 	// uncomment to track average FPS:
 	// float averageFPS{ 0 };
 
-	while (!bQuitting) 
-	{
+	while (!bQuitting) {
 		ProcessInput();
 		auto time = std::chrono::system_clock::now();
 		std::chrono::duration<float> delta = time - lastTime;
@@ -44,8 +37,7 @@ void Game::Start() {
 		deltaTime = delta.count();
 
 		std::chrono::duration<float> elapsed = time - startTime;
-		if (elapsed.count() > 0.25f && frameCount > 10) 
-		{
+		if (elapsed.count() > 0.25f && frameCount > 10) {
 			// averageFPS = (float)frameCount / elapsed.count();
 			startTime = time;
 			frameCount = 0;
@@ -67,8 +59,7 @@ void Game::Start() {
 	pGraphics->Quit();
 }
 
-void Game::Quit()
-{
+void Game::Quit() {
 	bQuitting = true;
 }
 
@@ -76,25 +67,21 @@ const Input& Game::GetInput() const {
 	return *pInput;
 }
 
-void Game::ProcessInput()
-{
+void Game::ProcessInput() {
 	const Input& input = GetInput();
 	const IKeyboard& keyboard = input.GetKeyboard();
 	const IMouse& mouse = input.GetMouse();
 
 	// Leaving window
-	if (keyboard.GetKey(Key::ESCAPE))
-	{
+	if (keyboard.GetKey(Key::ESCAPE)) {
 		printf("\nQuitting Game..");
 		Quit();
 		return;
 	}
 
 	// Testing key outputs
-	for (int i = (int)Key::A; i <= (int)Key::Z; ++i)
-	{
-		if (keyboard.GetKey((Key)i))
-		{
+	for (int i = (int)Key::A; i <= (int)Key::Z; ++i) {
+		if (keyboard.GetKey((Key)i)) {
 			printf("%c\n", 'A' + i);
 			break; 
 		}
@@ -106,8 +93,7 @@ void Game::ProcessInput()
 	if (mouse.GetButtonDown(MouseButton::RIGHT))	printf("Mouse-Right\n");
 }
 
-void Game::Update(float /*deltaTime*/)
-{
+void Game::Update(float /*deltaTime*/) {
 	// Update your game logic here
 }
 

@@ -2,6 +2,8 @@
 
 // Global includes
 #include <iostream>
+#include <memory>
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/common.hpp>
@@ -25,19 +27,34 @@ extern "C"
 }
 #endif
 
-WindowsGraphics* pGraphics;
-Input* pInput;
-Game* pGame;
-
 int main() 
 {
-	pGraphics = new WindowsGraphics();
-	glfwSwapInterval(1);
+    try
+    {
+        // Create graphics first (owns the window)
+        auto graphics = std::make_unique<WindowsGraphics>();
+        glfwSwapInterval(1);
 
-	pInput = new Input(new WindowsKeyboard(pGraphics->Window()), new WindowsMouse(pGraphics->Window()));
-	pGame = new Game(pInput, pGraphics);
+        // Get reference to window for input creation
+        GLFWwindow &window = graphics->Window();
 
-	pGame->Start();
-	delete pGame;
+        // Create input system (references the window, doesn't own it)
+        auto input = std::make_unique<Input>(
+            std::make_unique<WindowsKeyboard>(window),
+            std::make_unique<WindowsMouse>(window)
+        );
+
+        // Create game (takes ownership of input and graphics)
+        auto game = std::make_unique<Game>(std::move(input), std::move(graphics));
+
+        // Run the game
+        game->Start();
+    } 
+    catch (const std::exception &e)
+    {
+        std::cerr << "Fatal error: " << e.what() << std::endl;
+        return 1;
+    }
+
 	return 0;
 }
