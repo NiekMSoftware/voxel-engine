@@ -3,11 +3,11 @@
 
 namespace voxel_engine::world
 {
-	Chunk::Chunk(const glm::ivec3 &chunkPos, GLuint cubeVBO) 
-		: mChunkPos(chunkPos)
-		, mInstanceVBO(0)
+	Chunk::Chunk(const glm::ivec3 &chunkPos, const GLuint cubeVBO) 
+		: mInstanceCount(0)
+		, mChunkPos(chunkPos)
 		, mChunkVAO(0)
-		, mInstanceCount(0)
+		, mInstanceVBO(0)
 		, bIsDirty(true)
 	{
 		// Initialize all voxels as air

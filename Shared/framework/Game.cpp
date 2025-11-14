@@ -81,7 +81,7 @@ void Game::Start() {
 	auto lastTime = startTime;
 
 	// uncomment to track average FPS:
-	float averageFPS{ 0 };
+	//float averageFPS{ 0 };
 
 	while (!bQuitting) {
 		ProcessInput();
@@ -92,7 +92,7 @@ void Game::Start() {
 
 		std::chrono::duration<float> elapsed = time - startTime;
 		if (elapsed.count() > 0.25f && frameCount > 10) {
-			averageFPS = (float)frameCount / elapsed.count();
+			//averageFPS = (float)frameCount / elapsed.count();
 			startTime = time;
 			frameCount = 0;
 		}
@@ -107,8 +107,6 @@ void Game::Start() {
 		glm::mat4 proj = pCamera->GetProjectionMatrix(ASPECT_RATIO);
 
 		pRenderer->Render(pChunkMgr->GetAllChunks(), view, proj);
-
-		printf("average frames: %f\n", averageFPS);
 
 		glFlush();
 		pGraphics->SwapBuffer();

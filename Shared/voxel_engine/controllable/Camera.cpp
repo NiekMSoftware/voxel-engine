@@ -1,6 +1,8 @@
 #include "Camera.h"
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
-Camera::Camera(const glm::vec3 &position, const glm::vec3 &up, float yaw, float pitch)
+Camera::Camera(const glm::vec3 &position, const glm::vec3 &up, const float yaw, const float pitch)
 	: mPosition(position)
 	, mWorldUp(up)
 	, mYaw(yaw)
@@ -38,7 +40,7 @@ void Camera::MoveDown(float deltaTime) {
 	mPosition -= mWorldUp * mMovementSpeed * deltaTime;
 }
 
-void Camera::ProcessMouseMovement(float xOffset, float yOffset, bool constrainPitch) {
+void Camera::ProcessMouseMovement(float xOffset, float yOffset, const bool constrainPitch) {
 	xOffset *= mMouseSensitivity;
 	yOffset *= mMouseSensitivity;
 
@@ -57,7 +59,7 @@ void Camera::ProcessMouseMovement(float xOffset, float yOffset, bool constrainPi
 	UpdateCameraVectors();
 }
 
-void Camera::ProcessMousePosition(float xPos, float yPos) {
+void Camera::ProcessMousePosition(const float xPos, const float yPos) {
 	if (bFirstMouse)
 	{
 		mLastMouseX = xPos;
@@ -65,8 +67,8 @@ void Camera::ProcessMousePosition(float xPos, float yPos) {
 		bFirstMouse = false;
 	}
 
-	float xOffset = xPos - mLastMouseX;
-	float yOffset = mLastMouseY - yPos;  // Reversed: y-coordinates go from bottom to top
+	const float xOffset = xPos - mLastMouseX;
+	const float yOffset = mLastMouseY - yPos;  // Reversed: y-coordinates go from bottom to top
 
 	mLastMouseX = xPos;
 	mLastMouseY = yPos;
@@ -78,7 +80,7 @@ glm::mat4 Camera::GetViewMatrix() const {
 	return glm::lookAt(mPosition, mPosition + mFront, mUp);
 }
 
-glm::mat4 Camera::GetProjectionMatrix(float aspectRatio, float nearPlane, float farPlane) const {
+glm::mat4 Camera::GetProjectionMatrix(const float aspectRatio, const float nearPlane, const float farPlane) const {
 	return glm::perspective(glm::radians(mFOV), aspectRatio, nearPlane, farPlane);
 }
 

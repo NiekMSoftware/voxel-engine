@@ -1,4 +1,3 @@
-#pragma once
 #include "WindowsInput.h"
 #include "framework/input/IInput.h"
 #include <GLFW/glfw3.h>
