@@ -14,22 +14,14 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\Game.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\IGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\input\IInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\input\Input.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\renderer\VoxelRenderer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\world\Chunk.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\stb_image.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\Game.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\input\Input.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\renderer\VoxelRenderer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\world\Chunk.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.cpp" />
   </ItemGroup>
 </Project>
