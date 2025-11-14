@@ -24,6 +24,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\stb_image.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\Game.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\input\Input.cpp" />
