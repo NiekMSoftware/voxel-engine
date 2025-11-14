@@ -4,7 +4,8 @@ A cross‑platform voxel engine. This repo is configured to build on Windows usi
 If you want to build it, make sure to install the latest version of Visual Studio Insider found [here](https://visualstudio.microsoft.com/insiders/).
 
 ## Usage of Repository
-This project is mainly used for my studies at BUAS, this repository will get updated weekly throughout the end of the second of my study.
+This project is mainly used for my studies at BUAS, this repository will get frequently updated. See the `voxel-engine` branch for Voxel engine development.
+This branch will get merged at the end of the block.
 
 ## Contributions
 Contributions are always welcome if you want to modify the code, just clone it and make a Pull Request and I'll look into it!
