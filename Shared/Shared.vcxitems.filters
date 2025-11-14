@@ -49,6 +49,12 @@
     <Filter Include="source\voxel_engine\world">
       <UniqueIdentifier>{245335c9-b5df-4f10-a185-5129a3c1d76f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="source\voxel_engine\controllable">
+      <UniqueIdentifier>{9b8f2d65-3d3c-472e-a740-edf30b69ffe1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="include\voxel_engine\controllable">
+      <UniqueIdentifier>{920c464d-daab-435e-856b-78d930eec77b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\input\IInput.h">
@@ -69,8 +75,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\renderer\VoxelRenderer.h">
       <Filter>include\voxel_engine\renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.h">
+      <Filter>include\voxel_engine\world</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.h">
+      <Filter>include\voxel_engine\controllable</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\input\Input.cpp">
@@ -85,8 +95,14 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\renderer\VoxelRenderer.cpp">
       <Filter>source\voxel_engine\renderer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\stb_image.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.cpp">
+      <Filter>source\voxel_engine\world</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\stb_image.cpp">
+      <Filter>source\framework</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.cpp">
+      <Filter>source\voxel_engine\controllable</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
