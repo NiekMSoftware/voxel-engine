@@ -14,6 +14,7 @@ class Camera
 	float mYaw;
 	float mPitch;
 
+	float mWalkSpeed, mSprintSpeed;
 	float mMovementSpeed;
 	float mMouseSensitivity;
 	float mFOV;
@@ -41,9 +42,11 @@ public:
 	void ProcessMousePosition(float xPos, float yPos);
 
 	// Getters
+	float GetWalkSpeed() const { return mWalkSpeed; }
+	float GetSprintSpeed() const { return mSprintSpeed; }
+	float GetMovementSpeed() const { return mMovementSpeed; }
 	glm::mat4 GetViewMatrix() const;
 	glm::mat4 GetProjectionMatrix(float aspectRatio, float nearPlane = 0.1f, float farPlane = 1000.0f) const;
-
 	const glm::vec3 &GetPosition() const { return mPosition; }
 	const glm::vec3 &GetFront() const { return mFront; }
 	float GetFOV() const { return mFOV; }
@@ -51,6 +54,8 @@ public:
 	// Setters
 	void SetPosition(const glm::vec3 &position) { mPosition = position; UpdateCameraVectors(); }
 	void SetMovementSpeed(const float speed) { mMovementSpeed = speed; }
+	void SetWalkSpeed(const float speed) { mWalkSpeed = speed; }
+	void SetSprintSpeed(const float speed) { mSprintSpeed = speed; }
 	void SetMouseSensitivity(const float sensitivity) { mMouseSensitivity = sensitivity; }
 
 private:

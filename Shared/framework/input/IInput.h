@@ -63,7 +63,19 @@ enum class Key
 	ARROW_RIGHT,
 	ARROW_DOWN,
 	ARROW_LEFT,
-	SPACE
+	SPACE,
+	F1,
+	F2,
+	F3,
+	F4,
+	F5,
+	F6,
+	F7,
+	F8,
+	F9,
+	F10,
+	F11,
+	F12
 };
 
 class IMouse

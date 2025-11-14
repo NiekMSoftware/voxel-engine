@@ -21,6 +21,9 @@
     <ClCompile Include="source\WindowsInput.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\extern\include\ImGui-master\backends\imgui_impl_glfw.cpp">
+      <Filter>source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\WindowsGraphics.h">

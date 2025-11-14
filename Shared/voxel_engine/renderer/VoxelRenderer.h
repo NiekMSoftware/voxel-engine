@@ -51,6 +51,8 @@ namespace voxel_engine::rendering
 			const glm::mat4 &projection);
 
 		void SetRenderDistance(const int distance) { mRenderDistance = (float)distance * 16.0f; }
+
+		int GetRenderDistance() const { return static_cast<int>(mRenderDistance / 16.0f); }
 		GLuint GetCubeVBO() const { return mCubeVBO; }
 
 	private:

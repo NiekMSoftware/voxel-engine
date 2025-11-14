@@ -8,4 +8,7 @@ public:
 
 	virtual void SwapBuffer() = 0;
 	virtual void Quit() = 0;
+
+	virtual void BeginImGuiFrame() = 0;
+	virtual void EndImGuiFrame() = 0;
 };

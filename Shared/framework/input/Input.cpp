@@ -1,5 +1,6 @@
 #include "Input.h"
 #include "IInput.h"
+#include <memory>
 
 Input::Input(std::unique_ptr<const IKeyboard> keyboard, std::unique_ptr<const IMouse> mouse)
 	: pKeyboard(std::move(keyboard)), pMouse(std::move(mouse)) { }

@@ -55,6 +55,15 @@
     <Filter Include="include\voxel_engine\controllable">
       <UniqueIdentifier>{920c464d-daab-435e-856b-78d930eec77b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="extern">
+      <UniqueIdentifier>{bf710bc0-677a-4d0a-aa3f-6b5658027d4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern\imgui">
+      <UniqueIdentifier>{1000ed11-496c-4520-a5c0-d1f5687406c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="extern\imgui\backends">
+      <UniqueIdentifier>{40f75b02-47d1-4b0f-865b-45f8a10bcd4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\input\IInput.h">
@@ -103,6 +112,21 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.cpp">
       <Filter>source\voxel_engine\controllable</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\backends\imgui_impl_opengl3.cpp">
+      <Filter>extern\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui.cpp">
+      <Filter>extern\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_draw.cpp">
+      <Filter>extern\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_tables.cpp">
+      <Filter>extern\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_widgets.cpp">
+      <Filter>extern\imgui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

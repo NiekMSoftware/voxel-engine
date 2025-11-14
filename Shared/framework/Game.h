@@ -40,6 +40,8 @@ protected:
 
 private:
 	int frameCount{ 0 };
+	bool bMouseCaptured{ true };
+	bool bShowDebugMode{ false };
 
 public:
 	Game(std::unique_ptr<const Input> input, std::unique_ptr<IGraphics> graphics);

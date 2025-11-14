@@ -24,6 +24,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_draw.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_tables.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_widgets.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\stb_image.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\Game.cpp" />

@@ -7,6 +7,8 @@ Camera::Camera(const glm::vec3 &position, const glm::vec3 &up, const float yaw, 
 	, mWorldUp(up)
 	, mYaw(yaw)
 	, mPitch(pitch)
+	, mWalkSpeed(4.3f)
+	, mSprintSpeed(5.6f)
 	, mMovementSpeed(10.0f)
 	, mMouseSensitivity(0.1f)
 	, mFOV(60.0f)
@@ -16,27 +18,27 @@ Camera::Camera(const glm::vec3 &position, const glm::vec3 &up, const float yaw, 
 	UpdateCameraVectors();
 }
 
-void Camera::MoveForward(float deltaTime) {
+void Camera::MoveForward(const float deltaTime) {
 	mPosition += mFront * mMovementSpeed * deltaTime;
 }
 
-void Camera::MoveBackward(float deltaTime) {
+void Camera::MoveBackward(const float deltaTime) {
 	mPosition -= mFront * mMovementSpeed * deltaTime;
 }
 
-void Camera::MoveLeft(float deltaTime) {
+void Camera::MoveLeft(const float deltaTime) {
 	mPosition -= mRight * mMovementSpeed * deltaTime;
 }
 
-void Camera::MoveRight(float deltaTime) {
+void Camera::MoveRight(const float deltaTime) {
 	mPosition += mRight * mMovementSpeed * deltaTime;
 }
 
-void Camera::MoveUp(float deltaTime) {
+void Camera::MoveUp(const float deltaTime) {
 	mPosition += mWorldUp * mMovementSpeed * deltaTime;
 }
 
-void Camera::MoveDown(float deltaTime) {
+void Camera::MoveDown(const float deltaTime) {
 	mPosition -= mWorldUp * mMovementSpeed * deltaTime;
 }
 

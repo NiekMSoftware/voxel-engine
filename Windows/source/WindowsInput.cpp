@@ -93,6 +93,18 @@ bool WindowsKeyboard::GetKey(Key key) const {
 	case Key::ARROW_DOWN: return glfwGetKey(&window, GLFW_KEY_DOWN);
 	case Key::ARROW_LEFT: return glfwGetKey(&window, GLFW_KEY_LEFT);
 	case Key::SPACE: return glfwGetKey(&window, GLFW_KEY_SPACE);
+	case Key::F1: return glfwGetKey(&window, GLFW_KEY_F1);
+	case Key::F2: return glfwGetKey(&window, GLFW_KEY_F2);
+	case Key::F3: return glfwGetKey(&window, GLFW_KEY_F3);
+	case Key::F4: return glfwGetKey(&window, GLFW_KEY_F4);
+	case Key::F5: return glfwGetKey(&window, GLFW_KEY_F5);
+	case Key::F6: return glfwGetKey(&window, GLFW_KEY_F6);
+	case Key::F7: return glfwGetKey(&window, GLFW_KEY_F7);
+	case Key::F8: return glfwGetKey(&window, GLFW_KEY_F8);
+	case Key::F9: return glfwGetKey(&window, GLFW_KEY_F9);
+	case Key::F10: return glfwGetKey(&window, GLFW_KEY_F10);
+	case Key::F11: return glfwGetKey(&window, GLFW_KEY_F11);
+	case Key::F12: return glfwGetKey(&window, GLFW_KEY_F12);
 	default: std::cout << "ERROR::INPUT::WINDOWS Keycode not supported: " << static_cast<int>(key) << std::endl; return false;
 	}
 }

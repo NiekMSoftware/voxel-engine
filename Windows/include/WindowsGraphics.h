@@ -30,6 +30,10 @@ public:
 
 	void Quit() override;
 	void SwapBuffer() override;
+
+	void BeginImGuiFrame() override;
+	void EndImGuiFrame() override;;
+
 	GLFWwindow &Window() const;
 
 private:

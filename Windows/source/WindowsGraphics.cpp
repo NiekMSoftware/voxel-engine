@@ -1,6 +1,10 @@
 #include "WindowsGraphics.h"
 #include "framework/Game.h"
 #include <glad/glad.h>
+
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 #include <iostream>
 
 WindowsGraphics::WindowsGraphics() 
@@ -37,6 +41,18 @@ WindowsGraphics::WindowsGraphics()
 		std::cout << "Failed to initialize GLAD!\n";
 		throw std::runtime_error("Failed to initialize GLAD");
 	}
+
+	// ImGUI initialisation
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO &io = ImGui::GetIO();
+	io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+
+	ImGui::StyleColorsDark();
+
+	// Initialize platform/renderer backends
+	ImGui_ImplGlfw_InitForOpenGL(pWindow.get(), true);
+	ImGui_ImplOpenGL3_Init("#version 300 es");
 }
 
 WindowsGraphics::~WindowsGraphics() 
@@ -49,6 +65,10 @@ WindowsGraphics::~WindowsGraphics()
 
 void WindowsGraphics::Quit() 
 {
+	ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
+
 	pWindow.reset(); // Explicitly destroy window
 
 	if (bGLFWInitialized)
@@ -63,6 +83,19 @@ void WindowsGraphics::SwapBuffer()
 	glFlush();
 	glfwSwapBuffers(pWindow.get());
 	glfwPollEvents();
+}
+
+void WindowsGraphics::BeginImGuiFrame()
+{
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui_ImplGlfw_NewFrame();
+	ImGui::NewFrame();
+}
+
+void WindowsGraphics::EndImGuiFrame()
+{
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
 GLFWwindow &WindowsGraphics::Window() const 

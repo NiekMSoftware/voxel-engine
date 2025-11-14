@@ -108,9 +108,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINDOWS_BUILD;_DEBUG;_CONSOLE;_WINDOWS%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINDOWS_BUILD;_DEBUG;_CONSOLE;_WINDOWS;IMGUI_IMPL_OPENGL_ES;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(SolutionDir)extern\include\ImGui-master;$(SolutionDir)extern\include\ImGui-master\backends;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -135,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\extern\include\glad\glad.c" />
+    <ClCompile Include="..\extern\include\ImGui-master\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="source\WindowsGraphics.cpp" />
     <ClCompile Include="source\WindowsInput.cpp" />
     <ClCompile Include="source\WinMain.cpp" />

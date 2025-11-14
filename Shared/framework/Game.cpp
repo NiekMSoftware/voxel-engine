@@ -9,10 +9,15 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "imgui.h"
 
 // Interfaces
 #include "IGraphics.h"
 #include "input/IInput.h"
+
+#ifdef WINDOWS_BUILD
+#include "WindowsGraphics.h"
+#endif
 
 // Voxel Engine
 #include "voxel_engine/world/Chunk.h"
@@ -81,7 +86,7 @@ void Game::Start() {
 	auto lastTime = startTime;
 
 	// uncomment to track average FPS:
-	//float averageFPS{ 0 };
+	float averageFPS{ 0 };
 
 	while (!bQuitting) {
 		ProcessInput();
@@ -92,7 +97,7 @@ void Game::Start() {
 
 		std::chrono::duration<float> elapsed = time - startTime;
 		if (elapsed.count() > 0.25f && frameCount > 10) {
-			//averageFPS = (float)frameCount / elapsed.count();
+			averageFPS = (float)frameCount / elapsed.count();
 			startTime = time;
 			frameCount = 0;
 		}
@@ -107,6 +112,41 @@ void Game::Start() {
 		glm::mat4 proj = pCamera->GetProjectionMatrix(ASPECT_RATIO);
 
 		pRenderer->Render(pChunkMgr->GetAllChunks(), view, proj);
+
+		// Render ImGui
+		pGraphics->BeginImGuiFrame();
+		if (bShowDebugMode)
+		{
+			ImGui::Begin("Debug Info", &bShowDebugMode);
+			ImGui::Text("FPS: %.1f", averageFPS);
+			ImGui::Text("Frame Time: %.3f ms", deltaTime * 1000.0f);
+
+			glm::vec3 pos = pCamera->GetPosition();
+			ImGui::Text("Camera Position: (%.1f, %.1f, %.1f)", pos.x, pos.y, pos.z);
+
+			float walkSpeed = pCamera->GetWalkSpeed();
+			if (ImGui::SliderFloat("Walk Speed", &walkSpeed, 1.0f, 10.0f)) 
+			{
+				pCamera->SetWalkSpeed(walkSpeed);
+			}
+
+			float sprintSpeed = pCamera->GetSprintSpeed();
+			if (ImGui::SliderFloat("Sprint Speed", &sprintSpeed, 1.0f, 50.0f)) {
+				pCamera->SetSprintSpeed(sprintSpeed);
+			}
+
+			const float movementSpeed = pCamera->GetMovementSpeed();
+			ImGui::Text("Movement speed: %.1f", movementSpeed);
+
+			int renderDist = pRenderer->GetRenderDistance();
+			if (ImGui::SliderInt("Render Distance", &renderDist, 1, 12)) {
+				pRenderer->SetRenderDistance(renderDist);
+			}
+
+			ImGui::End();
+		}
+
+		pGraphics->EndImGuiFrame();
 
 		glFlush();
 		pGraphics->SwapBuffer();
@@ -134,9 +174,39 @@ void Game::ProcessInput() {
 		printf("\nQuitting Game..");
 		Quit();
 	}
+
+	// Toggle Mouse
+#ifdef WINDOWS_BUILD
+	static bool lastAltState = false;
+	const bool currentAltState = keyboard.GetKey(Key::ALT_LEFT);
+
+	if (currentAltState && !lastAltState) {
+		bMouseCaptured = !bMouseCaptured;
+
+		if (const WindowsGraphics *winGraphics = dynamic_cast<WindowsGraphics*>(pGraphics.get())) 
+		{
+			glfwSetInputMode(&winGraphics->Window(), GLFW_CURSOR,
+				bMouseCaptured ? GLFW_CURSOR_DISABLED : GLFW_CURSOR_NORMAL);
+		}
+	}
+	lastAltState = currentAltState;
+#endif
+
+	static bool lastF3State = false;
+	const bool currentF3State = keyboard.GetKey(Key::F3);
+	if (currentF3State && !lastF3State) 
+	{
+		bShowDebugMode = !bShowDebugMode;
+	}
+	lastF3State = currentF3State;
 }
 
 void Game::UpdateCamera() {
+	// Don't do anything when mouse is free
+	if (!bMouseCaptured) {
+		return;
+	}
+
 	const Input &input = GetInput();
 	const IKeyboard &keyboard = input.GetKeyboard();
 	const IMouse &mouse = input.GetMouse();
@@ -151,9 +221,9 @@ void Game::UpdateCamera() {
 
 	// Speed control
 	if (keyboard.GetKey(Key::SHIFT_LEFT)) {
-		pCamera->SetMovementSpeed(5.6f);  // Sprint
+		pCamera->SetMovementSpeed(pCamera->GetSprintSpeed());  // Sprint
 	} else {
-		pCamera->SetMovementSpeed(4.3f);  // Normal
+		pCamera->SetMovementSpeed(pCamera->GetWalkSpeed());  // Normal
 	}
 
 	// Camera rotation - Arrow Keys
