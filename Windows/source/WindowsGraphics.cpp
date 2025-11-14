@@ -52,7 +52,7 @@ WindowsGraphics::WindowsGraphics()
 
 	// Initialize platform/renderer backends
 	ImGui_ImplGlfw_InitForOpenGL(pWindow.get(), true);
-	ImGui_ImplOpenGL3_Init("#version 300 es");
+	ImGui_ImplOpenGL3_Init("#version 310 es");
 }
 
 WindowsGraphics::~WindowsGraphics() 
