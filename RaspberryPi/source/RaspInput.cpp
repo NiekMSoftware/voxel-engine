@@ -137,6 +137,20 @@ bool RaspKeyboard::GetKey(Key key) const
 	case Key::ARROW_DOWN:	return keyDown[KEY_DOWN] = isPressed(XK_Down);
 	case Key::ARROW_LEFT:	return keyDown[KEY_LEFT] = isPressed(XK_Left);
 	case Key::SPACE:		return keyDown[KEY_SPACE] = isPressed(XK_space);
+
+	case Key::F1:   return keyDown[KEY_F1] = isPressed(XK_F1);
+	case Key::F2:   return keyDown[KEY_F2] = isPressed(XK_F2);
+	case Key::F3:   return keyDown[KEY_F3] = isPressed(XK_F3);
+	case Key::F4:   return keyDown[KEY_F4] = isPressed(XK_F4);
+	case Key::F5:   return keyDown[KEY_F5] = isPressed(XK_F5);
+	case Key::F6:   return keyDown[KEY_F6] = isPressed(XK_F6);
+	case Key::F7:   return keyDown[KEY_F7] = isPressed(XK_F7);
+	case Key::F8:   return keyDown[KEY_F8] = isPressed(XK_F8);
+	case Key::F9:   return keyDown[KEY_F9] = isPressed(XK_F9);
+	case Key::F10:  return keyDown[KEY_F10] = isPressed(XK_F10);
+	case Key::F11:  return keyDown[KEY_F11] = isPressed(XK_F11);
+	case Key::F12:  return keyDown[KEY_F12] = isPressed(XK_F12);
+
 	default:
 		std::cout << "ERROR::INPUT::Rasp Keycode not supported: " << static_cast<int>(key) << std::endl;
 		return false;

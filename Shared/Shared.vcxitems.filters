@@ -55,14 +55,11 @@
     <Filter Include="include\voxel_engine\controllable">
       <UniqueIdentifier>{920c464d-daab-435e-856b-78d930eec77b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="extern">
-      <UniqueIdentifier>{bf710bc0-677a-4d0a-aa3f-6b5658027d4d}</UniqueIdentifier>
+    <Filter Include="resources">
+      <UniqueIdentifier>{9c94ee11-0f89-484d-b936-08bd490ce180}</UniqueIdentifier>
     </Filter>
-    <Filter Include="extern\imgui">
-      <UniqueIdentifier>{1000ed11-496c-4520-a5c0-d1f5687406c9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="extern\imgui\backends">
-      <UniqueIdentifier>{40f75b02-47d1-4b0f-865b-45f8a10bcd4d}</UniqueIdentifier>
+    <Filter Include="resources\imgui">
+      <UniqueIdentifier>{1dd80633-8444-4524-a2eb-83fa25d6e48c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -78,6 +75,24 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\Game.h">
       <Filter>include\framework</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imconfig.h">
+      <Filter>resources\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui.h">
+      <Filter>resources\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_internal.h">
+      <Filter>resources\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imstb_rectpack.h">
+      <Filter>resources\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imstb_textedit.h">
+      <Filter>resources\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imstb_truetype.h">
+      <Filter>resources\imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\input\Input.cpp">
@@ -86,23 +101,17 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\Game.cpp">
       <Filter>source\framework</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\stb_image.cpp">
-      <Filter>source\framework</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\backends\imgui_impl_opengl3.cpp">
-      <Filter>extern\imgui\backends</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui.cpp">
-      <Filter>extern\imgui</Filter>
+      <Filter>resources\imgui</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_draw.cpp">
-      <Filter>extern\imgui</Filter>
+      <Filter>resources\imgui</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_tables.cpp">
-      <Filter>extern\imgui</Filter>
+      <Filter>resources\imgui</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_widgets.cpp">
-      <Filter>extern\imgui</Filter>
+      <Filter>resources\imgui</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

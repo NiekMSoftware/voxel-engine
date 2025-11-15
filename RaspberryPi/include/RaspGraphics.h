@@ -10,7 +10,9 @@ public:
 	RaspGraphics();
 
 	void Quit() override;
-	void SwapBuffer() override; 
+	void SwapBuffer() override;
+	void BeginImGuiFrame() override;
+	void EndImGuiFrame() override;
 
 	XWindow& Window() const;
 

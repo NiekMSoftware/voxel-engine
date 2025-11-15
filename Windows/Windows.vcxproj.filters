@@ -7,12 +7,12 @@
     <Filter Include="source">
       <UniqueIdentifier>{f189866a-b9ae-471d-beb7-1015eecf44b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{f21884c3-1c84-44e6-a9d3-c8cf75fe557a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\WinMain.cpp">
-      <Filter>source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\extern\include\glad\glad.c">
       <Filter>source</Filter>
     </ClCompile>
     <ClCompile Include="source\WindowsGraphics.cpp">
@@ -21,8 +21,14 @@
     <ClCompile Include="source\WindowsInput.cpp">
       <Filter>source</Filter>
     </ClCompile>
+    <ClCompile Include="..\extern\include\glad\glad.c">
+      <Filter>resources</Filter>
+    </ClCompile>
     <ClCompile Include="..\extern\include\ImGui-master\backends\imgui_impl_glfw.cpp">
-      <Filter>source</Filter>
+      <Filter>resources</Filter>
+    </ClCompile>
+    <ClCompile Include="..\extern\include\ImGui-master\backends\imgui_impl_opengl3.cpp">
+      <Filter>resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -31,6 +37,12 @@
     </ClInclude>
     <ClInclude Include="include\WindowsInput.h">
       <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\include\ImGui-master\backends\imgui_impl_glfw.h">
+      <Filter>resources</Filter>
+    </ClInclude>
+    <ClInclude Include="..\extern\include\ImGui-master\backends\imgui_impl_opengl3.h">
+      <Filter>resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

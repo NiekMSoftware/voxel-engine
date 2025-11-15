@@ -137,11 +137,14 @@
   <ItemGroup>
     <ClCompile Include="..\extern\include\glad\glad.c" />
     <ClCompile Include="..\extern\include\ImGui-master\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="..\extern\include\ImGui-master\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="source\WindowsGraphics.cpp" />
     <ClCompile Include="source\WindowsInput.cpp" />
     <ClCompile Include="source\WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\extern\include\ImGui-master\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="..\extern\include\ImGui-master\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="include\WindowsGraphics.h" />
     <ClInclude Include="include\WindowsInput.h" />
   </ItemGroup>

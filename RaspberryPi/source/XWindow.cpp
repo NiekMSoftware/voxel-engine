@@ -33,7 +33,13 @@ void XWindow::CreateWindow()
 
 	window = XCreateWindow(display, root, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 0, CopyFromParent, InputOutput, CopyFromParent, CWEventMask, &swa);
 
-	XSelectInput(display, window, KeyPressMask | KeyReleaseMask);
+	XSelectInput(display, window,
+		ExposureMask |
+		KeyPressMask | KeyReleaseMask |
+		ButtonPressMask | ButtonReleaseMask |   // Mouse clicks!
+		PointerMotionMask |                     // Mouse movement
+		StructureNotifyMask |                   // Window resize
+		FocusChangeMask);                       // Focus events
 	xattr.override_redirect = false;
 	XChangeWindowAttributes(display, window, CWOverrideRedirect, &xattr);
 

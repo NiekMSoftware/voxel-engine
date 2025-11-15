@@ -14,18 +14,22 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imconfig.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_internal.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imstb_rectpack.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imstb_textedit.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imstb_truetype.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\Game.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\IGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\input\IInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\input\Input.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\backends\imgui_impl_opengl3.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_draw.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_tables.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\imgui_widgets.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\stb_image.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\Game.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\input\Input.cpp" />
   </ItemGroup>

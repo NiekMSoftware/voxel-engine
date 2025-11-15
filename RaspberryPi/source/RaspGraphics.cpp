@@ -4,16 +4,31 @@
 #include <GLES3/gl3.h>
 #include <GLES2/gl2ext.h>
 #include <EGL/egl.h>
+#include <X11/Xlib.h>
 #include "EGLState.h"
+#include "imgui.h"
+#include "imgui_impl_x11.h"
+#include "imgui_impl_opengl3.h"
 
 RaspGraphics::RaspGraphics() : window(new XWindow())
 {
     window->CreateWindow();
     SetupGLDebug();
+
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGui::GetIO();
+
+    ImGui_ImplX11_Init(&window->GetDisplay(), window->GetWindow());
+    ImGui_ImplOpenGL3_Init("#version 310 es");
 }
 
 void RaspGraphics::Quit()
 {
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplX11_Shutdown();
+    ImGui::DestroyContext();
+
     XDestroyWindow(&window->GetDisplay(), window->GetWindow());
 }
 
@@ -57,3 +72,27 @@ void RaspGraphics::SetupGLDebug() const
         glEnable(GL_DEBUG_OUTPUT_SYNCHRONOUS_KHR);
     }
 }
+
+void RaspGraphics::BeginImGuiFrame()
+{
+    // Process X11 events first
+    Display &display = window->GetDisplay();
+    while (XPending(&display))
+    {
+        XEvent event;
+        XNextEvent(&display, &event);
+        ImGui_ImplX11_ProcessEvent(&event);
+    }
+
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplX11_NewFrame();
+    ImGui::NewFrame();
+}
+
+void RaspGraphics::EndImGuiFrame()
+{
+    ImGui::Render();
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+}
+
+// EoF
