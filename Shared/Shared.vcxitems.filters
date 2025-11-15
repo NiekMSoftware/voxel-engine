@@ -78,18 +78,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)framework\Game.h">
       <Filter>include\framework</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\world\Chunk.h">
-      <Filter>include\voxel_engine\world</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\renderer\VoxelRenderer.h">
-      <Filter>include\voxel_engine\renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.h">
-      <Filter>include\voxel_engine\world</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.h">
-      <Filter>include\voxel_engine\controllable</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\input\Input.cpp">
@@ -98,20 +86,8 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)framework\Game.cpp">
       <Filter>source\framework</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\world\Chunk.cpp">
-      <Filter>source\voxel_engine\world</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\renderer\VoxelRenderer.cpp">
-      <Filter>source\voxel_engine\renderer</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\world\ChunkManager.cpp">
-      <Filter>source\voxel_engine\world</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\stb_image.cpp">
       <Filter>source\framework</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)voxel_engine\controllable\Camera.cpp">
-      <Filter>source\voxel_engine\controllable</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)..\extern\include\ImGui-master\backends\imgui_impl_opengl3.cpp">
       <Filter>extern\imgui\backends</Filter>

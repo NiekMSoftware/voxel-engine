@@ -2,13 +2,6 @@
 #include <memory>
 #include <vector>
 
-#include "voxel_engine/controllable/Camera.h"
-#include "voxel_engine/renderer/VoxelRenderer.h"
-#include "voxel_engine/world/ChunkManager.h"
-using namespace voxel_engine;
-using namespace voxel_engine::rendering;
-using namespace voxel_engine::world;
-
 #ifdef WINDOWS_BUILD
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -30,10 +23,6 @@ class Game
 protected:
 	std::unique_ptr<const Input> pInput;
 	std::unique_ptr<IGraphics> pGraphics;
-
-	std::unique_ptr<VoxelRenderer> pRenderer;
-	std::unique_ptr<ChunkManager> pChunkMgr;
-	std::unique_ptr<Camera> pCamera;
 
 	bool bQuitting{ false };
 	float deltaTime;
@@ -62,7 +51,6 @@ public:
 
 protected:
 	void ProcessInput();
-	void UpdateCamera();
 
 	virtual void Update(float deltaTime);
 	virtual void Render() {  }

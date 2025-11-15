@@ -1,0 +1,223 @@
+WEEK 1: Foundation (Renderer & World)
+Monday (8h)
+
+Integrate existing OpenGL ES engine with project (2h)
+Implement basic shader system (vertex/fragment shaders) (3h)
+Create texture atlas loading and management (3h)
+
+Tuesday (8h)
+
+Build chunk data structure (16x16x16 blocks) (4h)
+Add multiple block types (air, dirt, stone, grass, wood, sand) (2h)
+Implement block face culling (hidden face removal) (2h)
+
+Wednesday (8h)
+
+Complete block face culling (1h)
+Implement greedy meshing algorithm for chunk optimization (7h)
+
+Thursday (8h)
+
+Continue greedy meshing implementation and debugging (1h)
+Add proper texture coordinate mapping for greedy-meshed quads (3h)
+Implement basic camera with keyboard movement (WASD) and mouse look (4h)
+
+Friday (8h)
+
+Test and debug on both platforms (3h)
+Math study time (5h)
+
+
+WEEK 2: Player Physics & Basic Interaction
+Monday (8h)
+
+Implement Input Manager component (3h)
+Implement Player component with state management (3h)
+Math study time (2h)
+
+Tuesday (8h)
+
+Implement Physics component with AABB collision detection (5h)
+Add gravity, jumping, and ground detection (3h)
+
+Wednesday (8h)
+
+Implement block breaking and placing with raycasting (5h)
+Create simple inventory bar UI with block selection (3h)
+
+Thursday (8h)
+
+Add health bar UI and damage system (3h)
+Implement fall damage calculation (2h)
+Add drowning mechanic (oxygen bar + damage) (3h)
+
+Friday (8h)
+
+Add lava and thorn block damage (2h)
+Implement flat lighting (ambient occlusion per vertex) (5h)
+Math study time (1h)
+
+
+WEEK 3: World Generation & Lighting
+Monday (8h)
+
+Implement Perlin/Simplex noise library integration (2h)
+Create terrain height map generation (4h)
+Math study time (2h)
+
+Tuesday (8h)
+
+Add biome system (plains, forest, desert basic variations) (4h)
+Implement chunk streaming/loading based on player position (4h)
+
+Wednesday (8h)
+
+Complete chunk streaming/loading (1h)
+Create world save/load system for player modifications (6h)
+Math study time (1h)
+
+Thursday (8h)
+
+Implement sunlight propagation system (top-down) (6h)
+Add dynamic lighting from light sources (torches, lava) (2h)
+
+Friday (8h)
+
+Continue dynamic lighting implementation (4h)
+Optimize lighting updates to avoid lag (4h)
+
+
+WEEK 4: Infinite World, Fluids & Gameplay
+Monday (8h)
+
+Implement infinite world generation (chunk loading/unloading at view distance) (5h)
+Add falling sand/gravel physics with block updates (3h)
+
+Tuesday (8h)
+
+Complete falling block physics (2h)
+Implement water fluid simulation (simple spreading algorithm) (6h)
+
+Wednesday (8h)
+
+Add water rendering (transparent, animated texture) (3h)
+Create passive mob (sheep/pig/cow) with basic AI (wander, flee from player) (5h)
+
+Thursday (8h)
+
+Complete passive mob implementation (1h)
+Implement crafting system (crafting grid UI + recipes) (6h)
+Math study time (1h)
+
+Friday (8h)
+
+Add combat system (attacking, mob health, damage) (4h)
+Implement player death and respawn mechanics (3h)
+Math study time (1h)
+
+
+WEEK 5: Polish & Optional Features
+Monday (8h)
+
+Choose and plan optional features for weeks 5-7 (1h)
+Start Optional Feature 1 (7h)
+
+Tuesday (8h)
+
+Continue Optional Feature 1 (6h)
+Math study time (2h)
+
+Wednesday (8h)
+
+Complete Optional Feature 1 (2h)
+Start Optional Feature 2 (6h)
+
+Thursday (8h)
+
+Continue Optional Feature 2 (6h)
+Math study time (2h)
+
+Friday (8h)
+
+Complete Optional Feature 2 (4h)
+Start Optional Feature 3 (2h)
+Math study time (2h)
+
+Suggested Features for Week 5:
+
+Multiple mob types (hostile/neutral/passive) (8h)
+Sound effects and ambient audio (6h)
+Particle effects (block breaking, water splash) (6h)
+Day/night cycle with mob spawning rules (6h)
+Cave generation (6h)
+Trees and vegetation generation (5h)
+Food/hunger system (6h)
+
+
+WEEK 6: Advanced Features & Content
+Monday (8h)
+
+Continue Optional Feature 3 (6h)
+Math study time (2h)
+
+Tuesday (8h)
+
+Complete Optional Feature 3 (2h)
+Start Optional Feature 4 (6h)
+
+Wednesday (8h)
+
+Continue Optional Feature 4 (6h)
+Math study time (2h)
+
+Thursday (8h)
+
+Complete Optional Feature 4 (4h)
+Start Optional Feature 5 (4h)
+
+Friday (8h)
+
+Continue Optional Feature 5 (6h)
+Math study time (2h)
+
+Suggested Features for Week 6:
+
+Advanced crafting (furnace, enchanting table) (8h)
+Advanced mob AI (pathfinding, group behavior) (8h)
+Structure generation (villages, dungeons) (8h)
+Boss mob encounter (8h)
+Weather system (rain, snow in biomes) (6h)
+Achievement/advancement system (5h)
+Minecart system with rails (10h)
+Redstone-like circuit system basics (10h)
+Advanced rendering (shadows, better ambient occlusion) (10h)
+
+
+WEEK 7: Final Features & Bug Fixes
+Monday (8h)
+
+Complete Optional Feature 5 (4h)
+Comprehensive testing on Windows (2h)
+Math study time (2h)
+
+Tuesday (8h)
+
+Comprehensive testing on Pi4 (3h)
+Performance optimization and profiling (5h)
+
+Wednesday (8h)
+
+Bug fixing and edge case handling (6h)
+Math study time (2h)
+
+Thursday (8h)
+
+Continue bug fixing (2h)
+Documentation and code cleanup (4h)
+Create demo world/scenario for presentation (2h)
+
+Friday (8h)
+
+Final testing on both platforms (3h)
+Polish and final touches (3h)
+Project review and reflection (2h)

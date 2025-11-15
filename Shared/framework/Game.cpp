@@ -19,64 +19,12 @@
 #include "WindowsGraphics.h"
 #endif
 
-// Voxel Engine
-#include "voxel_engine/world/Chunk.h"
-
 #ifdef WINDOWS_BUILD
 // #include "WindowsInput.h"
 #endif
 
 Game::Game(std::unique_ptr<const Input> input, std::unique_ptr<IGraphics> graphics)
-	: pInput(std::move(input)), pGraphics(std::move(graphics)), deltaTime(0) {
-
-	pRenderer = std::make_unique<VoxelRenderer>();
-	pRenderer->Initialize();
-
-#if WINDOWS_BUILD
-	pRenderer->SetRenderDistance(6);
-#endif
-
-#if Raspberry_BUILD
-	pRenderer->SetRenderDistance(4);
-#endif
-
-	pChunkMgr = std::make_unique<ChunkManager>(pRenderer->GetCubeVBO());
-
-	// Initialize camera
-	pCamera = std::make_unique<Camera>(glm::vec3(8.0f, 35.f, 8.0f));
-	pCamera->SetMovementSpeed(15.0f);
-
-	// Generate 128×128×32 world (8×8×2 chunks)
-	for (int x = 0; x < 8; x++) {
-		for (int z = 0; z < 8; z++) {
-			for (int y = 0; y < 2; y++) {  // 2 vertical chunk layers
-				Chunk *chunk = pChunkMgr->CreateChunk(glm::ivec3(x, y, z));
-
-				// Fill chunks based on height
-				for (int i = 0; i < CHUNK_SIZE; i++) {
-					for (int j = 0; j < CHUNK_SIZE; j++) {
-						for (int k = 0; k < CHUNK_SIZE; k++) {
-							// Calculate world height
-							int worldY = y * CHUNK_SIZE + j;
-
-							if (worldY >= 32) continue;  // Above terrain
-
-							Voxel voxel;
-							if (worldY == 31) {
-								voxel.type = 1; voxel.textureID = 0;  // Grass top
-							} else if (worldY >= 28) {
-								voxel.type = 2; voxel.textureID = 1;  // Dirt
-							} else {
-								voxel.type = 3; voxel.textureID = 2;  // Stone
-							}
-							chunk->SetVoxel(i, j, k, voxel);
-						}
-					}
-				}
-			}
-		}
-	}
-}
+	: pInput(std::move(input)), pGraphics(std::move(graphics)), deltaTime(0) { }
 
 void Game::Start() {
 	InitializeGLES();
@@ -102,16 +50,9 @@ void Game::Start() {
 			frameCount = 0;
 		}
 
-		UpdateCamera();
-
 		// Set up the viewport
 		ClearScreen();
 		glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-		glm::mat4 view = pCamera->GetViewMatrix();
-		glm::mat4 proj = pCamera->GetProjectionMatrix(ASPECT_RATIO);
-
-		pRenderer->Render(pChunkMgr->GetAllChunks(), view, proj);
 
 		// Render ImGui
 		pGraphics->BeginImGuiFrame();
@@ -120,29 +61,6 @@ void Game::Start() {
 			ImGui::Begin("Debug Info", &bShowDebugMode);
 			ImGui::Text("FPS: %.1f", averageFPS);
 			ImGui::Text("Frame Time: %.3f ms", deltaTime * 1000.0f);
-
-			glm::vec3 pos = pCamera->GetPosition();
-			ImGui::Text("Camera Position: (%.1f, %.1f, %.1f)", pos.x, pos.y, pos.z);
-
-			float walkSpeed = pCamera->GetWalkSpeed();
-			if (ImGui::SliderFloat("Walk Speed", &walkSpeed, 1.0f, 10.0f)) 
-			{
-				pCamera->SetWalkSpeed(walkSpeed);
-			}
-
-			float sprintSpeed = pCamera->GetSprintSpeed();
-			if (ImGui::SliderFloat("Sprint Speed", &sprintSpeed, 1.0f, 50.0f)) {
-				pCamera->SetSprintSpeed(sprintSpeed);
-			}
-
-			const float movementSpeed = pCamera->GetMovementSpeed();
-			ImGui::Text("Movement speed: %.1f", movementSpeed);
-
-			int renderDist = pRenderer->GetRenderDistance();
-			if (ImGui::SliderInt("Render Distance", &renderDist, 1, 12)) {
-				pRenderer->SetRenderDistance(renderDist);
-			}
-
 			ImGui::End();
 		}
 
@@ -199,50 +117,6 @@ void Game::ProcessInput() {
 		bShowDebugMode = !bShowDebugMode;
 	}
 	lastF3State = currentF3State;
-}
-
-void Game::UpdateCamera() {
-	// Don't do anything when mouse is free
-	if (!bMouseCaptured) {
-		return;
-	}
-
-	const Input &input = GetInput();
-	const IKeyboard &keyboard = input.GetKeyboard();
-	const IMouse &mouse = input.GetMouse();
-
-	// Movement
-	if (keyboard.GetKey(Key::W)) pCamera->MoveForward(deltaTime);
-	if (keyboard.GetKey(Key::S)) pCamera->MoveBackward(deltaTime);
-	if (keyboard.GetKey(Key::A)) pCamera->MoveLeft(deltaTime);
-	if (keyboard.GetKey(Key::D)) pCamera->MoveRight(deltaTime);
-	if (keyboard.GetKey(Key::SPACE)) pCamera->MoveUp(deltaTime);
-	if (keyboard.GetKey(Key::CTRL_LEFT)) pCamera->MoveDown(deltaTime);
-
-	// Speed control
-	if (keyboard.GetKey(Key::SHIFT_LEFT)) {
-		pCamera->SetMovementSpeed(pCamera->GetSprintSpeed());  // Sprint
-	} else {
-		pCamera->SetMovementSpeed(pCamera->GetWalkSpeed());  // Normal
-	}
-
-	// Camera rotation - Arrow Keys
-	const float rotationSpeed = 500.0f;
-	if (keyboard.GetKey(Key::ARROW_LEFT)) {
-		pCamera->ProcessMouseMovement(-rotationSpeed * deltaTime, 0.0f);
-	}
-	if (keyboard.GetKey(Key::ARROW_RIGHT)) {
-		pCamera->ProcessMouseMovement(rotationSpeed * deltaTime, 0.0f);
-	}
-	if (keyboard.GetKey(Key::ARROW_UP)) {
-		pCamera->ProcessMouseMovement(0.0f, rotationSpeed * deltaTime);
-	}
-	if (keyboard.GetKey(Key::ARROW_DOWN)) {
-		pCamera->ProcessMouseMovement(0.0f, -rotationSpeed * deltaTime);
-	}
-
-	const glm::vec2 mousePos = mouse.GetPosition();
-	pCamera->ProcessMousePosition(mousePos.x, mousePos.y);
 }
 
 void Game::Update(float /*deltaTime*/) {
